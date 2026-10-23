@@ -1,0 +1,27 @@
+# Local environments and Python caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Raw datasets and generated local outputs
+data/raw/
+data/processed/
+outputs/
+*.log
+
+# Local editor and OS files
+.DS_Store
+.vscode/
+.claude/
+
+# Dissertation material and working notes are kept outside the GitHub release
+thesis/
+docs/
+scripts/
+*.docx
+*.pdf
+project_architecture*.png
+CSMPR-F01-MSc-Project-Specification-Form-*
+UG UoR Computer Science Report Template and Guide/

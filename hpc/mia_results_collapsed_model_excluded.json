@@ -1,0 +1,18 @@
+[
+  {
+    "tag": "baseline_no_dp",
+    "n_members_sampled": 2000,
+    "n_nonmembers_sampled": 2000,
+    "mean_member_loss": 0.18356541030929657,
+    "mean_nonmember_loss": 0.36206161234343015,
+    "attack_auc": 0.596125625
+  },
+  {
+    "tag": "dp_sgd",
+    "n_members_sampled": 2000,
+    "n_nonmembers_sampled": 2000,
+    "mean_member_loss": 0.2521549946818268,
+    "mean_nonmember_loss": 0.1823983129405533,
+    "attack_auc": 0.639830875
+  }
+]

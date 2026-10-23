@@ -1,0 +1,73 @@
+{
+  "run_type": "dp_sgd",
+  "seed": 42,
+  "tiebreak": "hash",
+  "noise_multiplier": 1.1,
+  "max_grad_norm": 100.0,
+  "delta": 1e-05,
+  "final_epsilon": 2.274161009709876,
+  "minority_oversample_factor": 1.0,
+  "class_weights": [
+    1.0,
+    10.0
+  ],
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6858363131682078,
+      "epsilon": 1.2479896795387295
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6804497420787812,
+      "epsilon": 1.574787846353648
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.677262830734253,
+      "epsilon": 1.8378809208328202
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6709977984428406,
+      "epsilon": 2.0671541768123944
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6667894045511882,
+      "epsilon": 2.274161009709876
+    }
+  ],
+  "window_size": 5,
+  "train_windows": 29890,
+  "test_windows": 16666,
+  "average_precision": 0.11886380737529757,
+  "roc_auc": 0.6981998096440486,
+  "classification_report": {
+    "Safe": {
+      "precision": 0.9862119013062409,
+      "recall": 0.08719923002887392,
+      "f1-score": 0.16023109119849083,
+      "support": 15585.0
+    },
+    "Fraud": {
+      "precision": 0.0694662480376766,
+      "recall": 0.9824236817761333,
+      "f1-score": 0.12975746838536256,
+      "support": 1081.0
+    },
+    "accuracy": 0.1452658106324253,
+    "macro avg": {
+      "precision": 0.5278390746719588,
+      "recall": 0.5348114559025036,
+      "f1-score": 0.1449942797919267,
+      "support": 16666.0
+    },
+    "weighted avg": {
+      "precision": 0.926749399735179,
+      "recall": 0.1452658106324253,
+      "f1-score": 0.15825449295890173,
+      "support": 16666.0
+    }
+  }
+}

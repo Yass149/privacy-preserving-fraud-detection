@@ -1,0 +1,86 @@
+{
+  "run_type": "dp_sgd",
+  "dataset": "paysim",
+  "seed": 42,
+  "input_dim": 10,
+  "feature_cols": [
+    "amount",
+    "oldbalanceOrg",
+    "newbalanceOrig",
+    "oldbalanceDest",
+    "newbalanceDest",
+    "type_CASH_IN",
+    "type_CASH_OUT",
+    "type_DEBIT",
+    "type_PAYMENT",
+    "type_TRANSFER"
+  ],
+  "window_size": 1,
+  "train_quantile": 0.7,
+  "chronological_cutoff_step": 323.0,
+  "noise_multiplier": 1.1,
+  "max_grad_norm": 1.0,
+  "delta": 1e-05,
+  "final_epsilon": 0.13224356785146235,
+  "minority_oversample_factor": 1.0,
+  "class_weights": [
+    1.0,
+    10.0
+  ],
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.07779104574403,
+      "epsilon": 0.061656102491066636
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0742274310777744,
+      "epsilon": 0.084772398151254
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.06528570945840452,
+      "epsilon": 0.10292447984095764
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.06211779307388524,
+      "epsilon": 0.11843185701153845
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.05916881107797852,
+      "epsilon": 0.13224356785146235
+    }
+  ],
+  "train_rows": 4463587,
+  "test_rows": 1899033,
+  "classification_report": {
+    "Safe": {
+      "precision": 0.9977863405148667,
+      "recall": 1.0,
+      "f1-score": 0.9988919438279057,
+      "support": 1894463.0
+    },
+    "Fraud": {
+      "precision": 1.0,
+      "recall": 0.08030634573304157,
+      "f1-score": 0.1486732833704679,
+      "support": 4570.0
+    },
+    "accuracy": 0.9977867683184021,
+    "macro avg": {
+      "precision": 0.9988931702574333,
+      "recall": 0.5401531728665208,
+      "f1-score": 0.5737826135991868,
+      "support": 1899033.0
+    },
+    "weighted avg": {
+      "precision": 0.9977916676597067,
+      "recall": 0.9977867683184021,
+      "f1-score": 0.996845902880597,
+      "support": 1899033.0
+    }
+  }
+}

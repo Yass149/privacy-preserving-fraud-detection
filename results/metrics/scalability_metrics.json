@@ -1,0 +1,7 @@
+{
+  "csv_path": "/scratch5/ic800171/thesis_project/elliptic_data/paysim.csv",
+  "row_count": 6362620,
+  "cpu_seconds": 8.20065712928772,
+  "gpu_seconds": 0.48025989532470703,
+  "speedup": 17.075456870582954
+}

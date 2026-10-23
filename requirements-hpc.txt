@@ -1,0 +1,25 @@
+# HPC-side training/evaluation pipeline (hpc/*.py). Run on RACC2 or an
+# equivalent CUDA GPU node -- NOT installable on a CPU-only laptop, since
+# cudf/RAPIDS requires a CUDA-capable GPU and its own conda channel.
+#
+# cuDF is not on PyPI in a plain-pip-installable form; install it from the
+# RAPIDS conda channel first, matching your CUDA version, e.g.:
+#   conda create -n thesis-hpc -c rapidsai -c conda-forge -c nvidia \
+#       cudf=<rapids-version> python=3.10 cuda-version=<your-cuda-version>
+#   conda activate thesis-hpc
+#   pip install -r requirements-hpc.txt
+# See https://rapids.ai/start.html for the exact command for your CUDA version.
+#
+# Unpinned: no version pins existed anywhere in this project before this file.
+# Pin these yourself once you have a working RACC2 environment, so the exact
+# versions that produced the thesis's reported numbers are captured -- this
+# matters more here than for the dashboard, since Opacus's RDP accountant and
+# cuDF's merge/sort semantics are both version-sensitive.
+
+torch
+opacus
+scikit-learn
+pandas
+numpy
+
+# cudf: install via the RAPIDS conda command above, not pip.

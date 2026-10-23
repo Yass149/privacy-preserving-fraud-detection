@@ -1,0 +1,6418 @@
+{
+  "checkpoint": "fraud_detector_oversampled.pth",
+  "tiebreak": "hash",
+  "seed": 42,
+  "window_size": 5,
+  "input_dim": 165,
+  "decision_threshold": 0.5,
+  "n_test_windows_total": 16666,
+  "outcome_counts_full_test_set": {
+    "true_positive": 803,
+    "false_negative": 278,
+    "false_positive": 2663,
+    "true_negative": 12922
+  },
+  "note": "Derived model outputs only -- no raw Elliptic feature values are included. Feature indices refer to the dataset's anonymised columns, whose semantics are not published.",
+  "cases": [
+    {
+      "id": 8464,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9966852068901062,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.30992764234542847
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.27992531657218933
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2659158706665039
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.26465436816215515
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2338954508304596
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2311432808637619
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2200877070426941
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.21496997773647308
+        }
+      ]
+    },
+    {
+      "id": 516,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9944128394126892,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.43626657128334045
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3705851137638092
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.37037599086761475
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3355441689491272
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.3331516981124878
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.31103649735450745
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.28199660778045654
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.26681238412857056
+        }
+      ]
+    },
+    {
+      "id": 9073,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9963234663009644,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.4823274612426758
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.31349095702171326
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.29808908700942993
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2907806932926178
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.26637935638427734
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.24811957776546478
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.24118706583976746
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.23759618401527405
+        }
+      ]
+    },
+    {
+      "id": 1199,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9954320192337036,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.48604679107666016
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.30514928698539734
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.28938573598861694
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.28086286783218384
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2634802758693695
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.25794851779937744
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2484079748392105
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.24592062830924988
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9949002861976624,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.43303659558296204
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2655239701271057
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2534291446208954
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24618923664093018
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.21846884489059448
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.21680498123168945
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.20823906362056732
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.20674388110637665
+        }
+      ]
+    },
+    {
+      "id": 9330,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9899799823760986,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.2620672583580017
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.2252783179283142
+        },
+        {
+          "feature_index": 91,
+          "attribution": 0.22300317883491516
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.21173927187919617
+        },
+        {
+          "feature_index": 139,
+          "attribution": -0.20557883381843567
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.20542903244495392
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.19443343579769135
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.18249015510082245
+        }
+      ]
+    },
+    {
+      "id": 9626,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9968873858451843,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": 0.2762264609336853
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.24321311712265015
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2339366376399994
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22272618114948273
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22121559083461761
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.21256110072135925
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.20994897186756134
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.20291045308113098
+        }
+      ]
+    },
+    {
+      "id": 520,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9965355396270752,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.45204898715019226
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.28115347027778625
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2684099078178406
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.25883179903030396
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22353066504001617
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2192167043685913
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2164563685655594
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2152428925037384
+        }
+      ]
+    },
+    {
+      "id": 4566,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9960098266601562,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.562835156917572
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.35391557216644287
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2665369212627411
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24825114011764526
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.23903405666351318
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.23075804114341736
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2219909131526947
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22046616673469543
+        }
+      ]
+    },
+    {
+      "id": 7248,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9954013824462891,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.42872515320777893
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.3946223258972168
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.3725294768810272
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.30361148715019226
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.29658761620521545
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.27672699093818665
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.24723872542381287
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.23223137855529785
+        }
+      ]
+    },
+    {
+      "id": 5815,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9977601766586304,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.5517579317092896
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.47399672865867615
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.365459680557251
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.3504740297794342
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.34111642837524414
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.31088170409202576
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.26608359813690186
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2557639181613922
+        }
+      ]
+    },
+    {
+      "id": 489,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.997102677822113,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.4513128995895386
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.28094208240509033
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.27221402525901794
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.266049861907959
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.24431966245174408
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.23841740190982819
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.23311416804790497
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.23059837520122528
+        }
+      ]
+    },
+    {
+      "id": 4446,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9993010759353638,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": 0.2599835693836212
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.25434938073158264
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.23325252532958984
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2267218828201294
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2103673219680786
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.203952357172966
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2018074244260788
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.18977312743663788
+        }
+      ]
+    },
+    {
+      "id": 6865,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9941121935844421,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5336860418319702
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.35919812321662903
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3349744975566864
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.31765323877334595
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2879030108451843
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2671721875667572
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2670214772224426
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.25682294368743896
+        }
+      ]
+    },
+    {
+      "id": 4293,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9964069724082947,
+      "top_attributions": [
+        {
+          "feature_index": 87,
+          "attribution": 0.7566816806793213
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.4095360040664673
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.28725531697273254
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2630762755870819
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.24057701230049133
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22749288380146027
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2051859050989151
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2043147087097168
+        }
+      ]
+    },
+    {
+      "id": 724,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9925975799560547,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": 0.2952733337879181
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.28782016038894653
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2817055284976959
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.27330833673477173
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.26061785221099854
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2401387244462967
+        },
+        {
+          "feature_index": 139,
+          "attribution": -0.23493899405002594
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2315649688243866
+        }
+      ]
+    },
+    {
+      "id": 1688,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9961995482444763,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.4476233422756195
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.280973345041275
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2603898346424103
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.25849753618240356
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22693386673927307
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22375990450382233
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2180691659450531
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.21523934602737427
+        }
+      ]
+    },
+    {
+      "id": 6848,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9965884685516357,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5141608715057373
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.35454756021499634
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.31589409708976746
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.3120977580547333
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2938412129878998
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.26228997111320496
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.26073580980300903
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.25997090339660645
+        }
+      ]
+    },
+    {
+      "id": 5204,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9699362516403198,
+      "top_attributions": [
+        {
+          "feature_index": 80,
+          "attribution": 0.2965357303619385
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.27612069249153137
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2714446187019348
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.25926610827445984
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2564381957054138
+        },
+        {
+          "feature_index": 133,
+          "attribution": -0.23737908899784088
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22925390303134918
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22757211327552795
+        }
+      ]
+    },
+    {
+      "id": 8535,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9593567848205566,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.7159427404403687
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5174488425254822
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.47839978337287903
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.4350712299346924
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.4242687523365021
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.4053066372871399
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.37647467851638794
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3396041691303253
+        }
+      ]
+    },
+    {
+      "id": 7562,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9938068389892578,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.36446255445480347
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.34279534220695496
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.33181828260421753
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.31645917892456055
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.3038802146911621
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.26582133769989014
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.26567086577415466
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2589784562587738
+        }
+      ]
+    },
+    {
+      "id": 5309,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9949122667312622,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": -0.36297503113746643
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.26675722002983093
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.25153279304504395
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2377871423959732
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.23169884085655212
+        },
+        {
+          "feature_index": 149,
+          "attribution": -0.22408346831798553
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.21736642718315125
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.19993920624256134
+        }
+      ]
+    },
+    {
+      "id": 4300,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9919130802154541,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5012040138244629
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.34372183680534363
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.3175017833709717
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.3083434998989105
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.27134671807289124
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.26750263571739197
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2632772922515869
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.24882549047470093
+        }
+      ]
+    },
+    {
+      "id": 8793,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9961023330688477,
+      "top_attributions": [
+        {
+          "feature_index": 2,
+          "attribution": -0.29501351714134216
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2880174517631531
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2828735411167145
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.26870134472846985
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.23922520875930786
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.23691771924495697
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.23646898567676544
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.22933752834796906
+        }
+      ]
+    },
+    {
+      "id": 7868,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9963117241859436,
+      "top_attributions": [
+        {
+          "feature_index": 2,
+          "attribution": -0.28476524353027344
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.27180764079093933
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2638632357120514
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2518206536769867
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22918973863124847
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2239597588777542
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.22323614358901978
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.22017288208007812
+        }
+      ]
+    },
+    {
+      "id": 8551,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.996619462966919,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5825914740562439
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3658284544944763
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2699245512485504
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.249464750289917
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.24327175319194794
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2373439520597458
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22990840673446655
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22275882959365845
+        }
+      ]
+    },
+    {
+      "id": 7664,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9948011636734009,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.31339290738105774
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.28791582584381104
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2666112780570984
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.26587677001953125
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.26267096400260925
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.237030491232872
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22943711280822754
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22284896671772003
+        }
+      ]
+    },
+    {
+      "id": 5374,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9953437447547913,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.594764232635498
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3833227753639221
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2716667950153351
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2654365301132202
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2593461573123932
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.23771251738071442
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2308637946844101
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22343939542770386
+        }
+      ]
+    },
+    {
+      "id": 8546,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9990748167037964,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": 0.28777649998664856
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.23625953495502472
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.22982783615589142
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22586461901664734
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.225698783993721
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22263720631599426
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.21604016423225403
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.20426687598228455
+        }
+      ]
+    },
+    {
+      "id": 1119,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9976596832275391,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.6541726589202881
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.4347860813140869
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.326877623796463
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.30710020661354065
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2696942090988159
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2651074528694153
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2531476318836212
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.24958592653274536
+        }
+      ]
+    },
+    {
+      "id": 8098,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9934477210044861,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.3741123676300049
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.27446120977401733
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.25949686765670776
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.21959331631660461
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2155468463897705
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.21220959722995758
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2100527137517929
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.20423263311386108
+        }
+      ]
+    },
+    {
+      "id": 3975,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9978402853012085,
+      "top_attributions": [
+        {
+          "feature_index": 87,
+          "attribution": 0.6606826186180115
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.34261834621429443
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.262713760137558
+        },
+        {
+          "feature_index": 141,
+          "attribution": 0.23464886844158173
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2115752100944519
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.20776623487472534
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.20443817973136902
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2010219693183899
+        }
+      ]
+    },
+    {
+      "id": 3296,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9969713687896729,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5853714942932129
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.5165240168571472
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3316578269004822
+        },
+        {
+          "feature_index": 141,
+          "attribution": 0.2617071568965912
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24790720641613007
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2475748211145401
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.22878867387771606
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.22335819900035858
+        }
+      ]
+    },
+    {
+      "id": 8067,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9961650371551514,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": 0.25499340891838074
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2514266073703766
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.24713195860385895
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.20851589739322662
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2083026021718979
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.20713329315185547
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.20345349609851837
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.19328634440898895
+        }
+      ]
+    },
+    {
+      "id": 6009,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9978737831115723,
+      "top_attributions": [
+        {
+          "feature_index": 153,
+          "attribution": 1.30636727809906
+        },
+        {
+          "feature_index": 156,
+          "attribution": -0.6955322027206421
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6529650688171387
+        },
+        {
+          "feature_index": 141,
+          "attribution": 0.5471741557121277
+        },
+        {
+          "feature_index": 154,
+          "attribution": -0.5074614882469177
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.39589765667915344
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3128575086593628
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2979985475540161
+        }
+      ]
+    },
+    {
+      "id": 6804,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.994897186756134,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.37346765398979187
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.3437996804714203
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3361140191555023
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.32569172978401184
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.3052803874015808
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.27058735489845276
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.26762712001800537
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.267199844121933
+        }
+      ]
+    },
+    {
+      "id": 7865,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9962867498397827,
+      "top_attributions": [
+        {
+          "feature_index": 2,
+          "attribution": -0.2836169898509979
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.27204179763793945
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2629857361316681
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2537343502044678
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22855356335639954
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.22502198815345764
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.22232848405838013
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.22050493955612183
+        }
+      ]
+    },
+    {
+      "id": 4174,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9987766146659851,
+      "top_attributions": [
+        {
+          "feature_index": 87,
+          "attribution": 0.7429191470146179
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2538767158985138
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.24562916159629822
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24125291407108307
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.23135901987552643
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.22587507963180542
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.20697638392448425
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.19277572631835938
+        }
+      ]
+    },
+    {
+      "id": 4445,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9985789060592651,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.4517708420753479
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3136940598487854
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2944963276386261
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.288229376077652
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2452290803194046
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.24518005549907684
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.23531663417816162
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.2150547206401825
+        }
+      ]
+    },
+    {
+      "id": 479,
+      "outcome": "true_positive",
+      "true_label": 1,
+      "fraud_probability": 0.9986131191253662,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.439883828163147
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.281087726354599
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.2755037248134613
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.27196767926216125
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.227447971701622
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2207295000553131
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.21768683195114136
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.21628883481025696
+        }
+      ]
+    },
+    {
+      "id": 15481,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.018682628870010376,
+      "top_attributions": [
+        {
+          "feature_index": 127,
+          "attribution": -0.5122520923614502
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.454406201839447
+        },
+        {
+          "feature_index": 115,
+          "attribution": -0.4337196350097656
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.37018609046936035
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.3589714467525482
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3322988450527191
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.32554852962493896
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3218778669834137
+        }
+      ]
+    },
+    {
+      "id": 11696,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00024544508778490126,
+      "top_attributions": [
+        {
+          "feature_index": 56,
+          "attribution": -0.6965559720993042
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.5748407244682312
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5671252012252808
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.4358498752117157
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.354181170463562
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.35189470648765564
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.3398781418800354
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.33683839440345764
+        }
+      ]
+    },
+    {
+      "id": 15962,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0005490012117661536,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.015222430229187
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.8852059245109558
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.7680569291114807
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.7659744024276733
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.6934685111045837
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.6070936322212219
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5316511988639832
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.45000410079956055
+        }
+      ]
+    },
+    {
+      "id": 14951,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0012489204527810216,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.6048608422279358
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.5891784429550171
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5111973881721497
+        },
+        {
+          "feature_index": 115,
+          "attribution": -0.5053145289421082
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.4466921091079712
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.4350970685482025
+        },
+        {
+          "feature_index": 116,
+          "attribution": -0.3965979218482971
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.38781270384788513
+        }
+      ]
+    },
+    {
+      "id": 7438,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00015010683273430914,
+      "top_attributions": [
+        {
+          "feature_index": 135,
+          "attribution": -2.988786220550537
+        },
+        {
+          "feature_index": 138,
+          "attribution": -1.8373280763626099
+        },
+        {
+          "feature_index": 136,
+          "attribution": -1.280793309211731
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.5542653799057007
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.39558684825897217
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.3087911903858185
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.22589582204818726
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.22428840398788452
+        }
+      ]
+    },
+    {
+      "id": 16209,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00031048379605636,
+      "top_attributions": [
+        {
+          "feature_index": 26,
+          "attribution": -0.5907499194145203
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.4541701376438141
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.4343074858188629
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.4326361119747162
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3978854715824127
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.39502018690109253
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.38259947299957275
+        },
+        {
+          "feature_index": 32,
+          "attribution": -0.3585476577281952
+        }
+      ]
+    },
+    {
+      "id": 16611,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.3906225264072418,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.7341030836105347
+        },
+        {
+          "feature_index": 56,
+          "attribution": 0.6228083968162537
+        },
+        {
+          "feature_index": 98,
+          "attribution": -0.5944052934646606
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.570830762386322
+        },
+        {
+          "feature_index": 104,
+          "attribution": 0.5679755210876465
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.544924795627594
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5354535579681396
+        },
+        {
+          "feature_index": 109,
+          "attribution": -0.5295841693878174
+        }
+      ]
+    },
+    {
+      "id": 6473,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.07861341536045074,
+      "top_attributions": [
+        {
+          "feature_index": 155,
+          "attribution": -1.3174488544464111
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.7726649641990662
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.6259858012199402
+        },
+        {
+          "feature_index": 154,
+          "attribution": -0.6022974848747253
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.5254992246627808
+        },
+        {
+          "feature_index": 156,
+          "attribution": -0.5015473365783691
+        },
+        {
+          "feature_index": 120,
+          "attribution": -0.4538099467754364
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.4379190504550934
+        }
+      ]
+    },
+    {
+      "id": 5868,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00024127811775542796,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.7956245541572571
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.7282189130783081
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.5780548453330994
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.44693315029144287
+        },
+        {
+          "feature_index": 121,
+          "attribution": -0.44367727637290955
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.43694230914115906
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.4259765148162842
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.4223513603210449
+        }
+      ]
+    },
+    {
+      "id": 15878,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0004380451573524624,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.4685104787349701
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.46343615651130676
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.3807852566242218
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.3753453493118286
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.366522878408432
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3583490252494812
+        },
+        {
+          "feature_index": 104,
+          "attribution": -0.3548460304737091
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.35132133960723877
+        }
+      ]
+    },
+    {
+      "id": 15614,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0032405746169388294,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -1.242547869682312
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.8173238635063171
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.7309373617172241
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6715395450592041
+        },
+        {
+          "feature_index": 104,
+          "attribution": -0.5805726647377014
+        },
+        {
+          "feature_index": 118,
+          "attribution": -0.5378085374832153
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5316751003265381
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.5043551921844482
+        }
+      ]
+    },
+    {
+      "id": 15964,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.001570359105244279,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.9946233630180359
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.7467337250709534
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.7193648815155029
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.708869993686676
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.6539162993431091
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.6230983734130859
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.58973628282547
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5883366465568542
+        }
+      ]
+    },
+    {
+      "id": 16135,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0011900992831215262,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -1.2251865863800049
+        },
+        {
+          "feature_index": 53,
+          "attribution": -1.032122254371643
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.75908362865448
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.7428614497184753
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.7344616651535034
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.6790143251419067
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5839274525642395
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5700082778930664
+        }
+      ]
+    },
+    {
+      "id": 9191,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.013397209346294403,
+      "top_attributions": [
+        {
+          "feature_index": 49,
+          "attribution": -0.9511885643005371
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.8741803765296936
+        },
+        {
+          "feature_index": 121,
+          "attribution": 0.6851655840873718
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.666326642036438
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.5492865443229675
+        },
+        {
+          "feature_index": 31,
+          "attribution": -0.5407077074050903
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5146602988243103
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.47846031188964844
+        }
+      ]
+    },
+    {
+      "id": 3144,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0009810629999265075,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.9151099920272827
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.8606745600700378
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.6729167699813843
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6127450466156006
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.573012113571167
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.4476197063922882
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.43965765833854675
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.38547787070274353
+        }
+      ]
+    },
+    {
+      "id": 14477,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 7.269056368386373e-05,
+      "top_attributions": [
+        {
+          "feature_index": 1,
+          "attribution": -2.3276045322418213
+        },
+        {
+          "feature_index": 5,
+          "attribution": -1.0940052270889282
+        },
+        {
+          "feature_index": 3,
+          "attribution": -0.860763669013977
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.14111153781414032
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.09247885644435883
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.08597231656312943
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.08028394728899002
+        },
+        {
+          "feature_index": 56,
+          "attribution": 0.07594112306833267
+        }
+      ]
+    },
+    {
+      "id": 7126,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00021754195040557534,
+      "top_attributions": [
+        {
+          "feature_index": 135,
+          "attribution": -3.0467777252197266
+        },
+        {
+          "feature_index": 138,
+          "attribution": -1.9006801843643188
+        },
+        {
+          "feature_index": 136,
+          "attribution": -1.3336917161941528
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.5654922127723694
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.40215763449668884
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.3177768886089325
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.23264630138874054
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.2265932708978653
+        }
+      ]
+    },
+    {
+      "id": 5990,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0002204648480983451,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -1.0383062362670898
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.8255408406257629
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.7220085263252258
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.572664201259613
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.5396031141281128
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.5192238092422485
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5092757344245911
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.48560553789138794
+        }
+      ]
+    },
+    {
+      "id": 14922,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00013089219282846898,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.41256746649742126
+        },
+        {
+          "feature_index": 104,
+          "attribution": -0.40081724524497986
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.3721896708011627
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.33239343762397766
+        },
+        {
+          "feature_index": 109,
+          "attribution": -0.3291746973991394
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.31294745206832886
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3080877363681793
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.3025986850261688
+        }
+      ]
+    },
+    {
+      "id": 7505,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 8.582280133850873e-05,
+      "top_attributions": [
+        {
+          "feature_index": 135,
+          "attribution": -3.5672569274902344
+        },
+        {
+          "feature_index": 138,
+          "attribution": -2.210580348968506
+        },
+        {
+          "feature_index": 136,
+          "attribution": -1.5527607202529907
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.6720579266548157
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.4840836226940155
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.373511403799057
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.2753300368785858
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.26876747608184814
+        }
+      ]
+    },
+    {
+      "id": 15983,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0003000339784193784,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -1.0870130062103271
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.9789235591888428
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.7375490665435791
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.7188040018081665
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.6630333065986633
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.4362885057926178
+        },
+        {
+          "feature_index": 104,
+          "attribution": 0.42573294043540955
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.41599932312965393
+        }
+      ]
+    },
+    {
+      "id": 12308,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.014007683843374252,
+      "top_attributions": [
+        {
+          "feature_index": 43,
+          "attribution": -0.8536494374275208
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.8162170052528381
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.6971081495285034
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.5554654598236084
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5551763772964478
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.5545224547386169
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.46680206060409546
+        },
+        {
+          "feature_index": 32,
+          "attribution": -0.42953458428382874
+        }
+      ]
+    },
+    {
+      "id": 16037,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.007321308832615614,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.7054897546768188
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.5973459482192993
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5736687183380127
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.5355036854743958
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5335302948951721
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.4805302321910858
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.4587678611278534
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.43367162346839905
+        }
+      ]
+    },
+    {
+      "id": 4026,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.003388108452782035,
+      "top_attributions": [
+        {
+          "feature_index": 113,
+          "attribution": -0.4930560886859894
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.47239330410957336
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.3903989791870117
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.38664767146110535
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.3365468680858612
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.29815414547920227
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.24850915372371674
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.23933890461921692
+        }
+      ]
+    },
+    {
+      "id": 9939,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00016376299026887864,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.5519435405731201
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.3995346426963806
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.38978874683380127
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.37495362758636475
+        },
+        {
+          "feature_index": 25,
+          "attribution": -0.36133813858032227
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.33912569284439087
+        },
+        {
+          "feature_index": 121,
+          "attribution": -0.3300417959690094
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.2898194193840027
+        }
+      ]
+    },
+    {
+      "id": 8797,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.08563638478517532,
+      "top_attributions": [
+        {
+          "feature_index": 43,
+          "attribution": -0.5233210921287537
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.5149158835411072
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.5042101740837097
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.4378837049007416
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.42795684933662415
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.4123101830482483
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.40361544489860535
+        },
+        {
+          "feature_index": 32,
+          "attribution": -0.3959755301475525
+        }
+      ]
+    },
+    {
+      "id": 16024,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.029672253876924515,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.6887722611427307
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.6539155840873718
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.5979571342468262
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.5464727282524109
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.4034707546234131
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.39297470450401306
+        },
+        {
+          "feature_index": 138,
+          "attribution": 0.38938063383102417
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.34242862462997437
+        }
+      ]
+    },
+    {
+      "id": 16236,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0010553578613325953,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.6770874261856079
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.6384879350662231
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5392147302627563
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4675138294696808
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.4014614522457123
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.3899800777435303
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.38821789622306824
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.3824765980243683
+        }
+      ]
+    },
+    {
+      "id": 10725,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.000956005125772208,
+      "top_attributions": [
+        {
+          "feature_index": 113,
+          "attribution": -0.8751410245895386
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.63566654920578
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.601074755191803
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.5944519639015198
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5315097570419312
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.4889619052410126
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.43986159563064575
+        },
+        {
+          "feature_index": 32,
+          "attribution": -0.40312448143959045
+        }
+      ]
+    },
+    {
+      "id": 11615,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.005981214810162783,
+      "top_attributions": [
+        {
+          "feature_index": 49,
+          "attribution": -0.8152073621749878
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.7295675873756409
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.599382221698761
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.54587721824646
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.5224074721336365
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.4809103012084961
+        },
+        {
+          "feature_index": 31,
+          "attribution": -0.4373922049999237
+        },
+        {
+          "feature_index": 25,
+          "attribution": -0.4060494899749756
+        }
+      ]
+    },
+    {
+      "id": 16659,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.01349547691643238,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -0.7442054152488708
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.7134624719619751
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.696097195148468
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5172188878059387
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.4974640905857086
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.46964016556739807
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.43550944328308105
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.4191502332687378
+        }
+      ]
+    },
+    {
+      "id": 11825,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.16191843152046204,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -1.6169513463974
+        },
+        {
+          "feature_index": 53,
+          "attribution": -1.32695734500885
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.5869804620742798
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.44869479537010193
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4429512023925781
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.4244319200515747
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3633005917072296
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3593498468399048
+        }
+      ]
+    },
+    {
+      "id": 9062,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.03398760408163071,
+      "top_attributions": [
+        {
+          "feature_index": 49,
+          "attribution": -0.4346279203891754
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.3806662857532501
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.3688029944896698
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.3331505060195923
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.3196270763874054
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.3016381561756134
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.2928268611431122
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.27967381477355957
+        }
+      ]
+    },
+    {
+      "id": 12707,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.271696537733078,
+      "top_attributions": [
+        {
+          "feature_index": 115,
+          "attribution": -0.9523381590843201
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.8348159790039062
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.6403406262397766
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5312383770942688
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.49392011761665344
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.45945462584495544
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.44225379824638367
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3948966860771179
+        }
+      ]
+    },
+    {
+      "id": 10145,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0026175568345934153,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.6660579442977905
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5543074011802673
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.54096519947052
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3682328164577484
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.34792327880859375
+        },
+        {
+          "feature_index": 152,
+          "attribution": -0.34339970350265503
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.315975546836853
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.31315097212791443
+        }
+      ]
+    },
+    {
+      "id": 7348,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.00010479510092409328,
+      "top_attributions": [
+        {
+          "feature_index": 135,
+          "attribution": -3.5642125606536865
+        },
+        {
+          "feature_index": 138,
+          "attribution": -2.2324395179748535
+        },
+        {
+          "feature_index": 136,
+          "attribution": -1.5524073839187622
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.6729509234428406
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.4845905303955078
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.2728421092033386
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2689577341079712
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.2665221393108368
+        }
+      ]
+    },
+    {
+      "id": 204,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.011279556900262833,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.6235210299491882
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.3255347013473511
+        },
+        {
+          "feature_index": 122,
+          "attribution": -0.2762879431247711
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.26914411783218384
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.25806763768196106
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.25077229738235474
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.2491045445203781
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.24601592123508453
+        }
+      ]
+    },
+    {
+      "id": 16585,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.002675304189324379,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.5128978490829468
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.4903236925601959
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.42790135741233826
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.41882234811782837
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4154765009880066
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.3925573229789734
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.39120206236839294
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.3888564109802246
+        }
+      ]
+    },
+    {
+      "id": 6714,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0002799290232360363,
+      "top_attributions": [
+        {
+          "feature_index": 135,
+          "attribution": -2.9865524768829346
+        },
+        {
+          "feature_index": 138,
+          "attribution": -1.8601775169372559
+        },
+        {
+          "feature_index": 136,
+          "attribution": -1.308061122894287
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.5577190518379211
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.39529329538345337
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.31161099672317505
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.22653037309646606
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.22354672849178314
+        }
+      ]
+    },
+    {
+      "id": 15888,
+      "outcome": "false_negative",
+      "true_label": 1,
+      "fraud_probability": 0.0034002831671386957,
+      "top_attributions": [
+        {
+          "feature_index": 49,
+          "attribution": -0.7978833913803101
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.7439940571784973
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.7432286739349365
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.6933475732803345
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.6480590105056763
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.582096517086029
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5698451995849609
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.5527411103248596
+        }
+      ]
+    },
+    {
+      "id": 6122,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.6940850615501404,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.9080483317375183
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.6688471436500549
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5519846081733704
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.49169373512268066
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.45170289278030396
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.42439210414886475
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.4086993336677551
+        },
+        {
+          "feature_index": 144,
+          "attribution": 0.40221408009529114
+        }
+      ]
+    },
+    {
+      "id": 7063,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9974702596664429,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.4241211414337158
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.27691441774368286
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2603115141391754
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24624662101268768
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.22536011040210724
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.21701796352863312
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.21642932295799255
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2115064114332199
+        }
+      ]
+    },
+    {
+      "id": 12074,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9323107004165649,
+      "top_attributions": [
+        {
+          "feature_index": 113,
+          "attribution": -0.605167031288147
+        },
+        {
+          "feature_index": 109,
+          "attribution": -0.5832105875015259
+        },
+        {
+          "feature_index": 115,
+          "attribution": -0.5690104961395264
+        },
+        {
+          "feature_index": 152,
+          "attribution": -0.2863154113292694
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2797892093658447
+        },
+        {
+          "feature_index": 97,
+          "attribution": -0.25908997654914856
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.25425150990486145
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.25087806582450867
+        }
+      ]
+    },
+    {
+      "id": 8360,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9971296191215515,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.5086925625801086
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3047213852405548
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.28963911533355713
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.279901921749115
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2740386128425598
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.2702431082725525
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2645859718322754
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.25465428829193115
+        }
+      ]
+    },
+    {
+      "id": 11944,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9594112038612366,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": 0.49920010566711426
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.4900742173194885
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.41354504227638245
+        },
+        {
+          "feature_index": 163,
+          "attribution": -0.32650384306907654
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.3131186366081238
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.29410243034362793
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.27749428153038025
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.2666691541671753
+        }
+      ]
+    },
+    {
+      "id": 8443,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.968870222568512,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.7224941253662109
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.6253233551979065
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.3311397135257721
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.3190547525882721
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3117881715297699
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.3076816201210022
+        },
+        {
+          "feature_index": 87,
+          "attribution": 0.2832545340061188
+        },
+        {
+          "feature_index": 143,
+          "attribution": -0.2712797522544861
+        }
+      ]
+    },
+    {
+      "id": 15509,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9461548328399658,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.637065052986145
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.4388883709907532
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.33302780985832214
+        },
+        {
+          "feature_index": 143,
+          "attribution": -0.29102623462677
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.28168949484825134
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.26974165439605713
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.2525691092014313
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.24909311532974243
+        }
+      ]
+    },
+    {
+      "id": 1838,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.6131251454353333,
+      "top_attributions": [
+        {
+          "feature_index": 43,
+          "attribution": -0.8346594572067261
+        },
+        {
+          "feature_index": 56,
+          "attribution": 0.7901181578636169
+        },
+        {
+          "feature_index": 12,
+          "attribution": -0.6984791159629822
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.6758842468261719
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.630031406879425
+        },
+        {
+          "feature_index": 55,
+          "attribution": 0.6048119068145752
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.6003695130348206
+        },
+        {
+          "feature_index": 103,
+          "attribution": 0.5637807846069336
+        }
+      ]
+    },
+    {
+      "id": 16529,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.7326584458351135,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.5308088064193726
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.5081064701080322
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3703031837940216
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.2671041786670685
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.2591204345226288
+        },
+        {
+          "feature_index": 91,
+          "attribution": 0.24525855481624603
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.2339705377817154
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.21423424780368805
+        }
+      ]
+    },
+    {
+      "id": 7014,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9310519695281982,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.7015769481658936
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.6279402375221252
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.36726224422454834
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.3440226912498474
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.32808440923690796
+        },
+        {
+          "feature_index": 87,
+          "attribution": 0.3149561583995819
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.3054753541946411
+        },
+        {
+          "feature_index": 158,
+          "attribution": 0.29832321405410767
+        }
+      ]
+    },
+    {
+      "id": 3104,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9827135801315308,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.8327810168266296
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.3897399604320526
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.38090601563453674
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.36933398246765137
+        },
+        {
+          "feature_index": 61,
+          "attribution": -0.35531461238861084
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.3399171829223633
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.3247942328453064
+        },
+        {
+          "feature_index": 62,
+          "attribution": -0.31495052576065063
+        }
+      ]
+    },
+    {
+      "id": 3090,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9960005879402161,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5684062242507935
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.32106199860572815
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.29573822021484375
+        },
+        {
+          "feature_index": 74,
+          "attribution": 0.26644062995910645
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.19653771817684174
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.19571836292743683
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.19033131003379822
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.1850508749485016
+        }
+      ]
+    },
+    {
+      "id": 12463,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9864953756332397,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": -0.4467252492904663
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.43748486042022705
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.41568559408187866
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.3060755133628845
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.30317744612693787
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.29838037490844727
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2975827753543854
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.2844916582107544
+        }
+      ]
+    },
+    {
+      "id": 5864,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.815211296081543,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.2398759126663208
+        },
+        {
+          "feature_index": 87,
+          "attribution": 1.0869786739349365
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.910938024520874
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.8440276980400085
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.6109171509742737
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3651646375656128
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.293728232383728
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.256078839302063
+        }
+      ]
+    },
+    {
+      "id": 11705,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.6212535500526428,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.9180417656898499
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.8363131880760193
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.47563356161117554
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.4257787764072418
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.4233544170856476
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.36908021569252014
+        },
+        {
+          "feature_index": 2,
+          "attribution": 0.3527127802371979
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.34675854444503784
+        }
+      ]
+    },
+    {
+      "id": 5290,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.629123866558075,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.5355461239814758
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.5103455185890198
+        },
+        {
+          "feature_index": 137,
+          "attribution": -0.3373022675514221
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3076665997505188
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2931882441043854
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.28316494822502136
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2769472002983093
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.27086275815963745
+        }
+      ]
+    },
+    {
+      "id": 7554,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9602600336074829,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.7383866310119629
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.6537126898765564
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3469577729701996
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.33471953868865967
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.3026350736618042
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.2873569428920746
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.2573530673980713
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.25397443771362305
+        }
+      ]
+    },
+    {
+      "id": 11958,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9945646524429321,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": 0.45964863896369934
+        },
+        {
+          "feature_index": 12,
+          "attribution": -0.3560311496257782
+        },
+        {
+          "feature_index": 121,
+          "attribution": 0.2740572988986969
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.27256712317466736
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.24679844081401825
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.20245888829231262
+        },
+        {
+          "feature_index": 163,
+          "attribution": 0.19559620320796967
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.18913283944129944
+        }
+      ]
+    },
+    {
+      "id": 2798,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9951171875,
+      "top_attributions": [
+        {
+          "feature_index": 164,
+          "attribution": 0.25156369805336
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.22148101031780243
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.21752333641052246
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.21707040071487427
+        },
+        {
+          "feature_index": 163,
+          "attribution": 0.21223565936088562
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.21220427751541138
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.19835348427295685
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.19721192121505737
+        }
+      ]
+    },
+    {
+      "id": 11879,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9886266589164734,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.7572901248931885
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.41968151926994324
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.40561625361442566
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.360489159822464
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3286149501800537
+        },
+        {
+          "feature_index": 61,
+          "attribution": -0.32450440526008606
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.31927821040153503
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.3089069724082947
+        }
+      ]
+    },
+    {
+      "id": 16313,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9917228817939758,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.6889175176620483
+        },
+        {
+          "feature_index": 87,
+          "attribution": 1.2702149152755737
+        },
+        {
+          "feature_index": 52,
+          "attribution": -1.239675521850586
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.1356528997421265
+        },
+        {
+          "feature_index": 73,
+          "attribution": 0.45249345898628235
+        },
+        {
+          "feature_index": 74,
+          "attribution": 0.45130056142807007
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.42390039563179016
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.41583073139190674
+        }
+      ]
+    },
+    {
+      "id": 12521,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9873144030570984,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.6526433825492859
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.519136905670166
+        },
+        {
+          "feature_index": 73,
+          "attribution": -0.48533594608306885
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.4606247842311859
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.4268556237220764
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.4145772159099579
+        },
+        {
+          "feature_index": 62,
+          "attribution": -0.3805446922779083
+        },
+        {
+          "feature_index": 61,
+          "attribution": -0.33277416229248047
+        }
+      ]
+    },
+    {
+      "id": 7165,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.965535044670105,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.5718428492546082
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5449234843254089
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.4944722056388855
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.3883898854255676
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.35428687930107117
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.3193081319332123
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.28087475895881653
+        },
+        {
+          "feature_index": 62,
+          "attribution": -0.2702781856060028
+        }
+      ]
+    },
+    {
+      "id": 6415,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.7243212461471558,
+      "top_attributions": [
+        {
+          "feature_index": 87,
+          "attribution": 3.7088820934295654
+        },
+        {
+          "feature_index": 51,
+          "attribution": -1.0428467988967896
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.8360493183135986
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.8073292374610901
+        },
+        {
+          "feature_index": 88,
+          "attribution": -0.7000321745872498
+        },
+        {
+          "feature_index": 90,
+          "attribution": -0.6564329266548157
+        },
+        {
+          "feature_index": 148,
+          "attribution": 0.64393550157547
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.39148688316345215
+        }
+      ]
+    },
+    {
+      "id": 382,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9841809272766113,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": 0.46681204438209534
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.4291068911552429
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.2873462438583374
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.27016863226890564
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.26756662130355835
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.24960999190807343
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2484453171491623
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2425774335861206
+        }
+      ]
+    },
+    {
+      "id": 13941,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9750242829322815,
+      "top_attributions": [
+        {
+          "feature_index": 148,
+          "attribution": -0.42728736996650696
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.38702428340911865
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.37464672327041626
+        },
+        {
+          "feature_index": 163,
+          "attribution": -0.3200893998146057
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.24267619848251343
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.24247677624225616
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.2342078685760498
+        },
+        {
+          "feature_index": 92,
+          "attribution": 0.21381574869155884
+        }
+      ]
+    },
+    {
+      "id": 2971,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9766721725463867,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.7885445356369019
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.7248497605323792
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.39714694023132324
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.33800309896469116
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.3245833218097687
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.2775353789329529
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.24285079538822174
+        },
+        {
+          "feature_index": 158,
+          "attribution": 0.23338887095451355
+        }
+      ]
+    },
+    {
+      "id": 6720,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.5943326354026794,
+      "top_attributions": [
+        {
+          "feature_index": 152,
+          "attribution": -0.38020649552345276
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.33834701776504517
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.30044442415237427
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.29498419165611267
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.2818201184272766
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.28016048669815063
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.2774753272533417
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.27454638481140137
+        }
+      ]
+    },
+    {
+      "id": 14714,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9303610920906067,
+      "top_attributions": [
+        {
+          "feature_index": 153,
+          "attribution": 0.7131108045578003
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.6591014266014099
+        },
+        {
+          "feature_index": 74,
+          "attribution": 0.5747409462928772
+        },
+        {
+          "feature_index": 105,
+          "attribution": -0.5658449530601501
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.4938226342201233
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.45650723576545715
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.41572752594947815
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4089016616344452
+        }
+      ]
+    },
+    {
+      "id": 12765,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.8754000067710876,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.5463719964027405
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.5041126608848572
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.42189374566078186
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.3074135184288025
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.29701632261276245
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.29443085193634033
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2847229242324829
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.283595472574234
+        }
+      ]
+    },
+    {
+      "id": 4202,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9693311452865601,
+      "top_attributions": [
+        {
+          "feature_index": 73,
+          "attribution": -0.8061225414276123
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.7451618909835815
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.39972972869873047
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.3860059976577759
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.3113708794116974
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.28908994793891907
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.2795692980289459
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.26109451055526733
+        }
+      ]
+    },
+    {
+      "id": 11256,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9270709753036499,
+      "top_attributions": [
+        {
+          "feature_index": 1,
+          "attribution": -0.9832097887992859
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6199725270271301
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5338726043701172
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.4860130548477173
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.32197147607803345
+        },
+        {
+          "feature_index": 80,
+          "attribution": 0.2930693030357361
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2891417145729065
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.2735915184020996
+        }
+      ]
+    },
+    {
+      "id": 5664,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.8095681667327881,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.1982828378677368
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.8647692203521729
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.7276841998100281
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.4185729920864105
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.4019539952278137
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.37643998861312866
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.37588179111480713
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.26754525303840637
+        }
+      ]
+    },
+    {
+      "id": 12119,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.7598543167114258,
+      "top_attributions": [
+        {
+          "feature_index": 164,
+          "attribution": -0.45844975113868713
+        },
+        {
+          "feature_index": 149,
+          "attribution": 0.41598883271217346
+        },
+        {
+          "feature_index": 163,
+          "attribution": -0.30842453241348267
+        },
+        {
+          "feature_index": 133,
+          "attribution": -0.30087974667549133
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.30041569471359253
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.2909895181655884
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2832486629486084
+        },
+        {
+          "feature_index": 91,
+          "attribution": -0.27854883670806885
+        }
+      ]
+    },
+    {
+      "id": 8376,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9908692836761475,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.6535398364067078
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.40473511815071106
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.39226004481315613
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.3338651657104492
+        },
+        {
+          "feature_index": 61,
+          "attribution": -0.32494744658470154
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3164394795894623
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2889871895313263
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.2826184928417206
+        }
+      ]
+    },
+    {
+      "id": 7747,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.5637750625610352,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.9600301384925842
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6249232292175293
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.6183130741119385
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.5945945382118225
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.5750650763511658
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.5489968061447144
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4513457715511322
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.4511158764362335
+        }
+      ]
+    },
+    {
+      "id": 11488,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.5612273216247559,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.6694657206535339
+        },
+        {
+          "feature_index": 96,
+          "attribution": -0.6203027367591858
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6045914888381958
+        },
+        {
+          "feature_index": 73,
+          "attribution": -0.531843364238739
+        },
+        {
+          "feature_index": 132,
+          "attribution": -0.5280749201774597
+        },
+        {
+          "feature_index": 93,
+          "attribution": -0.5137017965316772
+        },
+        {
+          "feature_index": 94,
+          "attribution": -0.5090491771697998
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.46438172459602356
+        }
+      ]
+    },
+    {
+      "id": 2143,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9869935512542725,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.7318586707115173
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.4392832815647125
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.4118479788303375
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.40843039751052856
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.36182475090026855
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.3403564989566803
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.33145850896835327
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.3226887285709381
+        }
+      ]
+    },
+    {
+      "id": 1439,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9832262396812439,
+      "top_attributions": [
+        {
+          "feature_index": 149,
+          "attribution": -0.33834484219551086
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.26669731736183167
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.259794682264328
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.22938328981399536
+        },
+        {
+          "feature_index": 163,
+          "attribution": 0.18495458364486694
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.17682312428951263
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.17601266503334045
+        },
+        {
+          "feature_index": 88,
+          "attribution": 0.17428579926490784
+        }
+      ]
+    },
+    {
+      "id": 1473,
+      "outcome": "false_positive",
+      "true_label": 0,
+      "fraud_probability": 0.9926419854164124,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": 0.2565408945083618
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.2536654770374298
+        },
+        {
+          "feature_index": 134,
+          "attribution": -0.25184646248817444
+        },
+        {
+          "feature_index": 155,
+          "attribution": 0.2331221103668213
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.22055457532405853
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.214486762881279
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.20328865945339203
+        },
+        {
+          "feature_index": 86,
+          "attribution": -0.1990486979484558
+        }
+      ]
+    },
+    {
+      "id": 11294,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.001662309980019927,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.8016465306282043
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.619697630405426
+        },
+        {
+          "feature_index": 152,
+          "attribution": -0.5117995738983154
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.5085613131523132
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.3969883918762207
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3868705630302429
+        },
+        {
+          "feature_index": 139,
+          "attribution": -0.36823034286499023
+        },
+        {
+          "feature_index": 146,
+          "attribution": -0.34393396973609924
+        }
+      ]
+    },
+    {
+      "id": 15979,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00105423538479954,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.6208230257034302
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.2215237617492676
+        },
+        {
+          "feature_index": 52,
+          "attribution": -1.0695412158966064
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.580629825592041
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5023015141487122
+        },
+        {
+          "feature_index": 137,
+          "attribution": -0.44792240858078003
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.39812883734703064
+        },
+        {
+          "feature_index": 153,
+          "attribution": 0.35871556401252747
+        }
+      ]
+    },
+    {
+      "id": 12911,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0004015953163616359,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -2.0639100074768066
+        },
+        {
+          "feature_index": 52,
+          "attribution": -1.7549718618392944
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.7127305269241333
+        },
+        {
+          "feature_index": 155,
+          "attribution": -1.631351113319397
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.8699123859405518
+        },
+        {
+          "feature_index": 154,
+          "attribution": -0.7894957661628723
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5382435321807861
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.5284046530723572
+        }
+      ]
+    },
+    {
+      "id": 15476,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.000260868517216295,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -2.263158082962036
+        },
+        {
+          "feature_index": 52,
+          "attribution": -1.8758385181427002
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.8239152431488037
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.8256204724311829
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5389629602432251
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.4952472150325775
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.4839610457420349
+        },
+        {
+          "feature_index": 88,
+          "attribution": -0.4319787919521332
+        }
+      ]
+    },
+    {
+      "id": 9932,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.45017939805984497,
+      "top_attributions": [
+        {
+          "feature_index": 89,
+          "attribution": -0.8935515284538269
+        },
+        {
+          "feature_index": 88,
+          "attribution": -0.48917460441589355
+        },
+        {
+          "feature_index": 164,
+          "attribution": 0.3744814395904541
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.32743704319000244
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.3101380467414856
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.26557084918022156
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.23985473811626434
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.21883632242679596
+        }
+      ]
+    },
+    {
+      "id": 4972,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.2689356505870819,
+      "top_attributions": [
+        {
+          "feature_index": 147,
+          "attribution": 0.7743452191352844
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.7086330056190491
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.6372770071029663
+        },
+        {
+          "feature_index": 144,
+          "attribution": 0.5276960730552673
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.41102129220962524
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.35188186168670654
+        },
+        {
+          "feature_index": 86,
+          "attribution": -0.3333975672721863
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.321895033121109
+        }
+      ]
+    },
+    {
+      "id": 7989,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0001972388126887381,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -0.7847775220870972
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.6618143320083618
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.6127015948295593
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.5915393829345703
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5716344118118286
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.3553442060947418
+        },
+        {
+          "feature_index": 139,
+          "attribution": -0.32534176111221313
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.32466921210289
+        }
+      ]
+    },
+    {
+      "id": 10075,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00014839196228422225,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.2928300201892853
+        },
+        {
+          "feature_index": 137,
+          "attribution": -0.2636335492134094
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.260846346616745
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.2608333230018616
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.2520408630371094
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.22855590283870697
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.22283613681793213
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.2210501730442047
+        }
+      ]
+    },
+    {
+      "id": 8248,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0001402036432409659,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -1.6679717302322388
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.935451865196228
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.6008582711219788
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5123378038406372
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.45722514390945435
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.4479483962059021
+        },
+        {
+          "feature_index": 5,
+          "attribution": -0.3483552932739258
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.33844438195228577
+        }
+      ]
+    },
+    {
+      "id": 2417,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.38721704483032227,
+      "top_attributions": [
+        {
+          "feature_index": 113,
+          "attribution": -0.4872943162918091
+        },
+        {
+          "feature_index": 154,
+          "attribution": -0.4619256854057312
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.4161933958530426
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.2630614936351776
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.22277969121932983
+        },
+        {
+          "feature_index": 112,
+          "attribution": -0.21958306431770325
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.15124830603599548
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.14993049204349518
+        }
+      ]
+    },
+    {
+      "id": 7066,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0005030936445109546,
+      "top_attributions": [
+        {
+          "feature_index": 2,
+          "attribution": -0.2944430708885193
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.28837159276008606
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.2867940366268158
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.2858361303806305
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.28284934163093567
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.27039748430252075
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.26787132024765015
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.25294703245162964
+        }
+      ]
+    },
+    {
+      "id": 5184,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0014201562153175473,
+      "top_attributions": [
+        {
+          "feature_index": 87,
+          "attribution": 0.3656144440174103
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.32050850987434387
+        },
+        {
+          "feature_index": 82,
+          "attribution": -0.27925172448158264
+        },
+        {
+          "feature_index": 40,
+          "attribution": -0.26875799894332886
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.24046297371387482
+        },
+        {
+          "feature_index": 73,
+          "attribution": -0.2313275784254074
+        },
+        {
+          "feature_index": 78,
+          "attribution": -0.22837552428245544
+        },
+        {
+          "feature_index": 74,
+          "attribution": -0.22276641428470612
+        }
+      ]
+    },
+    {
+      "id": 2815,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0009157978929579258,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -2.2082600593566895
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.720231533050537
+        },
+        {
+          "feature_index": 52,
+          "attribution": -1.590188980102539
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.8631364107131958
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.4986194372177124
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.4621754586696625
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.391798198223114
+        },
+        {
+          "feature_index": 62,
+          "attribution": -0.35364457964897156
+        }
+      ]
+    },
+    {
+      "id": 10026,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 8.525540033588186e-05,
+      "top_attributions": [
+        {
+          "feature_index": 50,
+          "attribution": -0.3853435814380646
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.32038378715515137
+        },
+        {
+          "feature_index": 107,
+          "attribution": -0.3125151991844177
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.31215909123420715
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.31071457266807556
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.29902851581573486
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.25240328907966614
+        },
+        {
+          "feature_index": 32,
+          "attribution": -0.22889240086078644
+        }
+      ]
+    },
+    {
+      "id": 1793,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 6.830200436525047e-05,
+      "top_attributions": [
+        {
+          "feature_index": 105,
+          "attribution": -0.8357878923416138
+        },
+        {
+          "feature_index": 106,
+          "attribution": -0.5275730490684509
+        },
+        {
+          "feature_index": 108,
+          "attribution": -0.4637085497379303
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.3995884954929352
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.22654171288013458
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.20714451372623444
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.20664583146572113
+        },
+        {
+          "feature_index": 123,
+          "attribution": -0.20092935860157013
+        }
+      ]
+    },
+    {
+      "id": 16462,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.013596627861261368,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -2.4260945320129395
+        },
+        {
+          "feature_index": 52,
+          "attribution": -2.0517375469207764
+        },
+        {
+          "feature_index": 54,
+          "attribution": -1.8422484397888184
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.9001596570014954
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.8268405199050903
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.7791825532913208
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.7626461386680603
+        },
+        {
+          "feature_index": 152,
+          "attribution": -0.6086623072624207
+        }
+      ]
+    },
+    {
+      "id": 5047,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00010792723332997411,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -0.35281452536582947
+        },
+        {
+          "feature_index": 87,
+          "attribution": 0.35263362526893616
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.3451268672943115
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.2871968448162079
+        },
+        {
+          "feature_index": 82,
+          "attribution": -0.2836475074291229
+        },
+        {
+          "feature_index": 73,
+          "attribution": 0.23781338334083557
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.22952821850776672
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.22329506278038025
+        }
+      ]
+    },
+    {
+      "id": 7314,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00031379589927382767,
+      "top_attributions": [
+        {
+          "feature_index": 49,
+          "attribution": -0.4023888409137726
+        },
+        {
+          "feature_index": 26,
+          "attribution": -0.3599544167518616
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.33570924401283264
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.3112064599990845
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.30786964297294617
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.28710874915122986
+        },
+        {
+          "feature_index": 109,
+          "attribution": -0.2718575894832611
+        },
+        {
+          "feature_index": 103,
+          "attribution": -0.2610440254211426
+        }
+      ]
+    },
+    {
+      "id": 1662,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.15039032697677612,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -2.9693663120269775
+        },
+        {
+          "feature_index": 52,
+          "attribution": -2.4362034797668457
+        },
+        {
+          "feature_index": 54,
+          "attribution": -2.3532447814941406
+        },
+        {
+          "feature_index": 87,
+          "attribution": 0.889553427696228
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.8526538610458374
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.7014241814613342
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.6261322498321533
+        },
+        {
+          "feature_index": 158,
+          "attribution": 0.5419394373893738
+        }
+      ]
+    },
+    {
+      "id": 1513,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.04783403128385544,
+      "top_attributions": [
+        {
+          "feature_index": 88,
+          "attribution": -1.4304431676864624
+        },
+        {
+          "feature_index": 89,
+          "attribution": -1.3614097833633423
+        },
+        {
+          "feature_index": 147,
+          "attribution": -0.4469970464706421
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.3920937776565552
+        },
+        {
+          "feature_index": 74,
+          "attribution": 0.38669681549072266
+        },
+        {
+          "feature_index": 140,
+          "attribution": 0.32152679562568665
+        },
+        {
+          "feature_index": 86,
+          "attribution": -0.3176542818546295
+        },
+        {
+          "feature_index": 2,
+          "attribution": 0.3170202672481537
+        }
+      ]
+    },
+    {
+      "id": 7610,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.1141069084405899,
+      "top_attributions": [
+        {
+          "feature_index": 20,
+          "attribution": -1.0732778310775757
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.8088006973266602
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.5665150284767151
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.557684600353241
+        },
+        {
+          "feature_index": 61,
+          "attribution": -0.5311706066131592
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.5280920267105103
+        },
+        {
+          "feature_index": 164,
+          "attribution": -0.5160925388336182
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.46975889801979065
+        }
+      ]
+    },
+    {
+      "id": 13393,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00014553428627550602,
+      "top_attributions": [
+        {
+          "feature_index": 95,
+          "attribution": -1.7282514572143555
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.4330567717552185
+        },
+        {
+          "feature_index": 94,
+          "attribution": -0.42882686853408813
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.34470048546791077
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.2941698431968689
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.28624117374420166
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.26041316986083984
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.251889169216156
+        }
+      ]
+    },
+    {
+      "id": 764,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00017301985644735396,
+      "top_attributions": [
+        {
+          "feature_index": 123,
+          "attribution": -0.6544218063354492
+        },
+        {
+          "feature_index": 126,
+          "attribution": -0.5063403248786926
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.37479618191719055
+        },
+        {
+          "feature_index": 124,
+          "attribution": -0.34438395500183105
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.23568212985992432
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.20797979831695557
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.20637060701847076
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.18979309499263763
+        }
+      ]
+    },
+    {
+      "id": 10598,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00018333125626668334,
+      "top_attributions": [
+        {
+          "feature_index": 155,
+          "attribution": -1.6500295400619507
+        },
+        {
+          "feature_index": 144,
+          "attribution": 0.8552367687225342
+        },
+        {
+          "feature_index": 154,
+          "attribution": -0.7530080676078796
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.6640386581420898
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5888328552246094
+        },
+        {
+          "feature_index": 1,
+          "attribution": -0.5729454755783081
+        },
+        {
+          "feature_index": 156,
+          "attribution": -0.5557231903076172
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.5498533248901367
+        }
+      ]
+    },
+    {
+      "id": 417,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0009354936773888767,
+      "top_attributions": [
+        {
+          "feature_index": 52,
+          "attribution": -1.1399186849594116
+        },
+        {
+          "feature_index": 53,
+          "attribution": -0.8281998634338379
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.5688874125480652
+        },
+        {
+          "feature_index": 12,
+          "attribution": -0.38180235028266907
+        },
+        {
+          "feature_index": 98,
+          "attribution": -0.3635770082473755
+        },
+        {
+          "feature_index": 104,
+          "attribution": 0.3458680510520935
+        },
+        {
+          "feature_index": 127,
+          "attribution": -0.3423503041267395
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.29465314745903015
+        }
+      ]
+    },
+    {
+      "id": 10895,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.029033644124865532,
+      "top_attributions": [
+        {
+          "feature_index": 1,
+          "attribution": -2.4516358375549316
+        },
+        {
+          "feature_index": 2,
+          "attribution": -0.7554320096969604
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.7246505618095398
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.6868376135826111
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.5480318069458008
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5469573736190796
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.46656787395477295
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.43757468461990356
+        }
+      ]
+    },
+    {
+      "id": 2885,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.0499851331114769,
+      "top_attributions": [
+        {
+          "feature_index": 137,
+          "attribution": -1.580172061920166
+        },
+        {
+          "feature_index": 157,
+          "attribution": -1.0407896041870117
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.8766359686851501
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.7617025971412659
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.5870503187179565
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.564346969127655
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.5300557017326355
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.5197979807853699
+        }
+      ]
+    },
+    {
+      "id": 2948,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00027943355962634087,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.7744956612586975
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.6371150016784668
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5866528749465942
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.5638560652732849
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.5021368265151978
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.4556329548358917
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.43784430623054504
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.37127918004989624
+        }
+      ]
+    },
+    {
+      "id": 3081,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00039173397817648947,
+      "top_attributions": [
+        {
+          "feature_index": 105,
+          "attribution": -2.227632522583008
+        },
+        {
+          "feature_index": 108,
+          "attribution": -1.2055586576461792
+        },
+        {
+          "feature_index": 106,
+          "attribution": -1.1366254091262817
+        },
+        {
+          "feature_index": 123,
+          "attribution": -0.2773124575614929
+        },
+        {
+          "feature_index": 126,
+          "attribution": -0.2016744613647461
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.17617462575435638
+        },
+        {
+          "feature_index": 124,
+          "attribution": -0.16395264863967896
+        },
+        {
+          "feature_index": 89,
+          "attribution": 0.14817118644714355
+        }
+      ]
+    },
+    {
+      "id": 2523,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00012246047845110297,
+      "top_attributions": [
+        {
+          "feature_index": 113,
+          "attribution": -0.6448981761932373
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.4773491621017456
+        },
+        {
+          "feature_index": 137,
+          "attribution": -0.44741401076316833
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.34735989570617676
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.3106527030467987
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.2993427515029907
+        },
+        {
+          "feature_index": 148,
+          "attribution": -0.26278677582740784
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.2586812973022461
+        }
+      ]
+    },
+    {
+      "id": 9966,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.43120256066322327,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -1.087054967880249
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.9590013027191162
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.9502198696136475
+        },
+        {
+          "feature_index": 52,
+          "attribution": 0.5928081274032593
+        },
+        {
+          "feature_index": 51,
+          "attribution": 0.577085018157959
+        },
+        {
+          "feature_index": 54,
+          "attribution": 0.5437848567962646
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.4557858109474182
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4443947374820709
+        }
+      ]
+    },
+    {
+      "id": 5817,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.006688354071229696,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -0.6580421924591064
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.5829322934150696
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.5739500522613525
+        },
+        {
+          "feature_index": 21,
+          "attribution": -0.39202144742012024
+        },
+        {
+          "feature_index": 40,
+          "attribution": -0.3799489140510559
+        },
+        {
+          "feature_index": 24,
+          "attribution": -0.2522358000278473
+        },
+        {
+          "feature_index": 87,
+          "attribution": 0.24459408223628998
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.23653383553028107
+        }
+      ]
+    },
+    {
+      "id": 8437,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.002504236064851284,
+      "top_attributions": [
+        {
+          "feature_index": 157,
+          "attribution": -0.8355441689491272
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.7012389898300171
+        },
+        {
+          "feature_index": 140,
+          "attribution": -0.48765313625335693
+        },
+        {
+          "feature_index": 152,
+          "attribution": -0.47869786620140076
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.4577752649784088
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.45342493057250977
+        },
+        {
+          "feature_index": 151,
+          "attribution": -0.4037785828113556
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.3763068914413452
+        }
+      ]
+    },
+    {
+      "id": 5537,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00014144250599201769,
+      "top_attributions": [
+        {
+          "feature_index": 144,
+          "attribution": 1.281891942024231
+        },
+        {
+          "feature_index": 143,
+          "attribution": -0.7907643914222717
+        },
+        {
+          "feature_index": 155,
+          "attribution": -0.7093722820281982
+        },
+        {
+          "feature_index": 157,
+          "attribution": -0.5444813966751099
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.5318582653999329
+        },
+        {
+          "feature_index": 158,
+          "attribution": -0.4517723321914673
+        },
+        {
+          "feature_index": 147,
+          "attribution": 0.39543023705482483
+        },
+        {
+          "feature_index": 19,
+          "attribution": -0.34762996435165405
+        }
+      ]
+    },
+    {
+      "id": 13508,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.42519548535346985,
+      "top_attributions": [
+        {
+          "feature_index": 51,
+          "attribution": -1.1009764671325684
+        },
+        {
+          "feature_index": 74,
+          "attribution": -1.0342036485671997
+        },
+        {
+          "feature_index": 73,
+          "attribution": -1.0042412281036377
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.9570072889328003
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.8896945118904114
+        },
+        {
+          "feature_index": 20,
+          "attribution": 0.5813304781913757
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.5619407892227173
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.5460065007209778
+        }
+      ]
+    },
+    {
+      "id": 11055,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00015375463408418,
+      "top_attributions": [
+        {
+          "feature_index": 56,
+          "attribution": -0.9810621738433838
+        },
+        {
+          "feature_index": 50,
+          "attribution": -0.7381842732429504
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.6487522721290588
+        },
+        {
+          "feature_index": 43,
+          "attribution": -0.5329204797744751
+        },
+        {
+          "feature_index": 49,
+          "attribution": -0.514703094959259
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.45956122875213623
+        },
+        {
+          "feature_index": 105,
+          "attribution": -0.4432642161846161
+        },
+        {
+          "feature_index": 44,
+          "attribution": -0.4283222258090973
+        }
+      ]
+    },
+    {
+      "id": 7012,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.00035912924795411527,
+      "top_attributions": [
+        {
+          "feature_index": 53,
+          "attribution": -0.9321978688240051
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.610806405544281
+        },
+        {
+          "feature_index": 113,
+          "attribution": -0.29657411575317383
+        },
+        {
+          "feature_index": 56,
+          "attribution": -0.2621295154094696
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.2521252930164337
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.2420378476381302
+        },
+        {
+          "feature_index": 104,
+          "attribution": -0.22224727272987366
+        },
+        {
+          "feature_index": 55,
+          "attribution": -0.18244768679141998
+        }
+      ]
+    },
+    {
+      "id": 2346,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 6.122350168880075e-05,
+      "top_attributions": [
+        {
+          "feature_index": 105,
+          "attribution": -1.6035981178283691
+        },
+        {
+          "feature_index": 108,
+          "attribution": -0.9554892778396606
+        },
+        {
+          "feature_index": 106,
+          "attribution": -0.7031967639923096
+        },
+        {
+          "feature_index": 123,
+          "attribution": -0.39866310358047485
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.34576675295829773
+        },
+        {
+          "feature_index": 126,
+          "attribution": -0.26877298951148987
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.22152453660964966
+        },
+        {
+          "feature_index": 124,
+          "attribution": -0.1806281954050064
+        }
+      ]
+    },
+    {
+      "id": 10575,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.09398479759693146,
+      "top_attributions": [
+        {
+          "feature_index": 161,
+          "attribution": -0.6449604630470276
+        },
+        {
+          "feature_index": 160,
+          "attribution": -0.5108158588409424
+        },
+        {
+          "feature_index": 51,
+          "attribution": -0.42204535007476807
+        },
+        {
+          "feature_index": 99,
+          "attribution": 0.35731053352355957
+        },
+        {
+          "feature_index": 52,
+          "attribution": -0.3560662567615509
+        },
+        {
+          "feature_index": 158,
+          "attribution": 0.3477603495121002
+        },
+        {
+          "feature_index": 100,
+          "attribution": 0.3475721478462219
+        },
+        {
+          "feature_index": 54,
+          "attribution": -0.3470625877380371
+        }
+      ]
+    },
+    {
+      "id": 10388,
+      "outcome": "true_negative",
+      "true_label": 0,
+      "fraud_probability": 0.004453239031136036,
+      "top_attributions": [
+        {
+          "feature_index": 105,
+          "attribution": -1.4362343549728394
+        },
+        {
+          "feature_index": 108,
+          "attribution": -1.0194586515426636
+        },
+        {
+          "feature_index": 20,
+          "attribution": -0.666308581829071
+        },
+        {
+          "feature_index": 157,
+          "attribution": 0.5082533955574036
+        },
+        {
+          "feature_index": 89,
+          "attribution": -0.4083877503871918
+        },
+        {
+          "feature_index": 102,
+          "attribution": 0.32583940029144287
+        },
+        {
+          "feature_index": 106,
+          "attribution": -0.3054386079311371
+        },
+        {
+          "feature_index": 158,
+          "attribution": 0.30220460891723633
+        }
+      ]
+    }
+  ]
+}

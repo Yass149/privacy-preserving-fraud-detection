@@ -1,0 +1,4 @@
+# Earlier Streamlit results dashboard; CPU-only, with precomputed inputs.
+streamlit
+numpy
+matplotlib

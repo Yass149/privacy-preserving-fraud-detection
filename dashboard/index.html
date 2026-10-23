@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fraud Detection Under Differential Privacy — Console</title>
+<style>
+/* Fraud triage workstation — MSc dissertation, University of Reading.
+   Dense terminal register: small precise type, tabular figures, tight rows,
+   dark chrome around a bright work surface. Colour is rationed to one alert
+   hue so it means something. No webfonts; runs with the network off. */
+:root{
+  color-scheme: light;
+  --chrome:  #12161B;  --chrome-2:#1B222A;  --chrome-3:#2A333D;
+  --on-chrome:#E6EAEE; --on-chrome-2:#8A97A4;
+  --surf:    #FFFFFF;  --surf-2:  #F6F8F9;  --surf-3:#EDF0F2;
+  --line:    #DFE4E8;  --line-2:  #EDF0F2;
+  --ink:     #10151A;  --ink-2:   #59656F;  --ink-3:#8D99A4;
+  --alert:   #C2352A;  --alert-bg:#FCEEEC;  --alert-2:#E8B4AE;
+  --f1:#10151A; --f2:#7C8892; --f3:#D5DBE0;
+  --ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mn: ui-monospace, "SF Mono", Menlo, Monaco, "Courier New", monospace;
+  --page:var(--surf-2); --sheet:var(--surf); --card:var(--surf); --panel:var(--surf-2);
+  --bg:var(--surf-2); --card-hover:var(--surf-3); --line-soft:var(--line-2);
+  --rule:var(--line); --rule-2:var(--line-2); --text:var(--ink); --text-soft:var(--ink);
+  --muted:var(--ink-2); --faint:var(--ink-3); --accent:var(--alert);
+  --blue:var(--ink); --blue-bright:var(--ink-2); --blue-tint:var(--surf-3);
+  --amber:var(--f2); --amber-tint:var(--surf-3); --green:var(--ink); --green-tint:var(--surf-3);
+  --red:var(--alert); --red-tint:var(--alert-bg); --stamp:var(--alert); --stamp-bg:var(--alert-bg);
+  --tone-1:var(--f1); --tone-2:var(--f2); --tone-3:var(--f3);
+  --verd:var(--ink); --verd-bg:var(--surf-3); --ochre:var(--f2); --ochre-bg:var(--surf-3);
+  --graph:var(--ink-2); --graph-bg:var(--surf-3); --stock:var(--surf-2); --stock-2:var(--surf-3);
+  --sheet-2:var(--surf-2); --doc:var(--ui); --reg:var(--mn); --sans:var(--ui); --mono:var(--mn);
+  --accent-bg:var(--alert-bg); --ink-3:#8D99A4;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{margin:0;background:var(--surf-2);color:var(--ink);font-family:var(--ui);
+  font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.mono,.fig{font-family:var(--mn);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
+.lc{text-transform:none!important;letter-spacing:0!important;}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--alert);outline-offset:1px;}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;}}
+
+.app{display:grid;grid-template-columns:196px minmax(0,1fr);height:100vh;}
+@media (max-width:900px){.app{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+/* left rail */
+.sidebar{background:var(--chrome);color:var(--on-chrome);display:flex;flex-direction:column;overflow-y:auto;padding:0;}
+.brand{padding:14px 16px 12px 16px;border-bottom:1px solid var(--chrome-3);}
+.brand .mark{display:none;}
+.brand .name{font-size:13px;font-weight:600;color:var(--on-chrome);letter-spacing:-.01em;}
+.brand .sub{font-size:10.5px;color:var(--on-chrome-2);margin-top:2px;font-family:var(--mn);}
+.brand::after{display:none;}
+nav.side-nav{display:block;padding:8px 8px;}
+.nav-section-label{font-family:var(--mn);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:#5C6874;padding:12px 8px 5px 8px;}
+.nav-item{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:6px 8px;
+  cursor:pointer;user-select:none;font-size:12.5px;color:#B4BFC9;border-radius:3px;border:0;}
+.nav-item svg{display:none;}
+.nav-item .idx{font-family:var(--mn);font-size:10px;color:#5C6874;}
+.nav-item:hover{background:var(--chrome-2);color:var(--on-chrome);}
+.nav-item.active{background:var(--chrome-2);color:#fff;box-shadow:inset 2px 0 0 0 var(--alert);}
+.nav-item.active .idx{color:var(--alert-2);}
+.sidebar-foot{margin-top:auto;padding:12px 16px 16px 16px;border-top:1px solid var(--chrome-3);}
+.status-pill{display:block;font-family:var(--mn);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#5C6874;margin-bottom:8px;}
+.status-pill .dot{display:none;}
+.prov{font-size:11px;color:#8A97A4;}
+.prov div{display:block;margin-bottom:6px;}
+.prov dt{display:block;font-size:10px;color:#5C6874;}
+.prov .lead{display:none;}
+.prov .v{display:block;font-family:var(--mn);font-size:10.5px;color:#B4BFC9;text-align:left;}
+.sidebar-foot p{font-size:10.5px;color:#5C6874;line-height:1.45;margin:10px 0 0 0;}
+
+/* app bar */
+main.content{overflow-y:auto;height:100vh;background:var(--surf-2);}
+.topbar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding:0 18px;height:46px;background:var(--chrome);border-bottom:1px solid var(--chrome-3);}
+.topbar-left{display:flex;align-items:baseline;gap:10px;}
+.topbar-left .crumb{font-family:var(--mn);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5C6874;}
+.topbar-left h1{font-size:13px;font-weight:600;margin:0;color:var(--on-chrome);letter-spacing:-.005em;}
+.topbar-right{display:flex;align-items:center;gap:0;}
+.search-fake{display:none;}
+.seed-pill{display:flex;gap:0;font-family:var(--mn);font-size:10.5px;color:var(--on-chrome-2);text-align:left;}
+.seed-pill > div{padding:0 14px;border-left:1px solid var(--chrome-3);line-height:1.35;}
+.seed-pill b{color:var(--on-chrome);font-weight:600;}
+
+.panel{padding:16px 18px 40px 18px;display:none;}
+.panel.active{display:block;}
+.panel-pitch{font-size:12px;color:var(--ink-3);margin-bottom:14px;padding-left:10px;border-left:2px solid var(--line);}
+.panel-pitch b{color:var(--ink-2);font-weight:600;}
+.panel-head{margin-bottom:16px;}
+.panel-head .eyebrow{font-family:var(--mn);font-size:9.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;}
+.panel-head h2{font-size:18px;font-weight:600;margin:0 0 6px 0;line-height:1.25;letter-spacing:-.018em;}
+.panel-head p{font-size:12.5px;color:var(--ink-2);line-height:1.55;max-width:88ch;margin:0;}
+.panel-head::after{display:none;}
+
+/* ---------------- the workstation ---------------- */
+.ws{display:grid;grid-template-columns:minmax(330px,400px) minmax(0,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);height:calc(100vh - 46px - 32px);min-height:560px;}
+@media (max-width:1000px){.ws{grid-template-columns:1fr;height:auto;}}
+.ws-col{background:var(--surf);display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+.ws-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surf-2);min-height:34px;}
+.ws-hd .t{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);}
+.ws-body{flex:1;min-height:0;overflow-y:auto;}
+.ws-foot{border-top:1px solid var(--line);background:var(--surf-2);padding:0;max-height:47%;overflow-y:auto;}
+.ws-foot .measure{border:0;border-radius:0;background:transparent;padding:10px 12px 12px 12px;margin:0!important;}
+.ws-foot .measure-cap{font-size:10.5px;margin-bottom:9px;padding-bottom:6px;}
+.ws-foot .measure-cap .k{font-size:11px;}
+.ws-foot .pop{margin-bottom:9px;}
+.ws-foot .card-note{font-size:10.5px;line-height:1.45;margin-top:9px;padding-top:8px;}
+.ws-foot .cross{margin-top:9px;padding-top:8px;font-size:11px;}
+.ws-body{scrollbar-gutter:stable;}
+
+/* metric strip in the app bar region */
+.mstrip{display:flex;flex-wrap:wrap;background:var(--surf);border:1px solid var(--line);
+  border-bottom:0;margin-bottom:0;}
+.mstrip > div{padding:8px 14px;border-right:1px solid var(--line);min-width:104px;}
+.mstrip > div:last-child{border-right:0;flex:1;}
+.mstrip .k{font-family:var(--mn);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);}
+.mstrip .v{font-family:var(--mn);font-size:16px;font-weight:600;color:var(--ink);line-height:1.2;margin-top:2px;}
+.mstrip .v.bad{color:var(--alert);}
+.mstrip .s{font-size:11px;color:var(--ink-3);margin-top:1px;}
+
+/* queue */
+.seg{display:flex;gap:4px;padding:7px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:var(--surf);}
+.seg button{font-family:var(--ui);font-size:11.5px;font-weight:500;color:var(--ink-2);background:var(--surf-2);
+  border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer;}
+.seg button:hover{background:var(--surf-3);color:var(--ink);}
+.seg button.active{background:var(--chrome);border-color:var(--chrome);color:#fff;}
+.queue-toolbar{display:none;}
+.queue-count{font-family:var(--mn);font-size:10.5px;color:var(--ink-3);}
+.queue-list{display:block;overflow-y:auto;max-height:none;margin:0;border:0;}
+.queue-list::-webkit-scrollbar{width:9px;}
+.queue-list::-webkit-scrollbar-thumb{background:#CBD3D9;}
+.queue-row{display:grid;grid-template-columns:52px 110px minmax(38px,1fr) 42px;align-items:center;gap:9px;width:100%;
+  padding:6px 12px;cursor:pointer;border:0;border-bottom:1px solid var(--line-2);background:transparent;
+  border-radius:0;font:inherit;color:inherit;text-align:left;appearance:none;}
+.queue-row:hover{background:var(--surf-2);}
+.queue-row.active{background:var(--surf-3);box-shadow:inset 2px 0 0 0 var(--alert);}
+.queue-row .qid{font-family:var(--mn);font-size:11.5px;color:var(--ink);}
+.queue-row .qmeter{position:relative;height:4px;background:var(--surf-3);border-radius:2px;overflow:hidden;}
+.queue-row .qmeter .fill{position:absolute;top:0;left:0;height:100%;border-radius:2px;}
+.queue-row .qprob{font-family:var(--mn);font-size:11px;color:var(--ink-2);text-align:right;}
+.badge{display:block;width:100%;font-family:var(--mn);font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.06em;padding:2px 5px;border-radius:2px;text-align:center;white-space:nowrap;
+  border:1px solid var(--line);background:var(--surf-2);color:var(--ink-2);}
+.badge.b-fn{color:var(--alert);border-color:var(--alert-2);background:var(--alert-bg);}
+.badge.b-tp{color:var(--ink);border-color:#C3CBD2;}
+
+table.detail-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+table.detail-table td{padding:6px 0;border-bottom:1px solid var(--line-2);}
+table.detail-table td:first-child{color:var(--ink-3);font-size:11.5px;}
+table.detail-table td:last-child{text-align:right;font-family:var(--mn);font-size:12px;color:var(--ink);}
+table.detail-table thead td{font-size:11px;font-weight:600;color:var(--ink-2);font-family:var(--ui);
+  border-bottom:1px solid var(--line);padding-bottom:6px;text-align:left;}
+table.detail-table td.note{font-family:var(--ui);font-size:11.5px;color:var(--ink-3);text-align:right;white-space:nowrap;}
+
+/* reference surfaces */
+.card,.kpi,.case-kpi,.defect-item,.code-card,.measure{background:var(--surf);border:1px solid var(--line);border-radius:3px;}
+.card{padding:13px 15px 15px 15px;}
+.card .card-title{font-size:12.5px;font-weight:600;padding:0;margin:0;}
+.card .card-sub{font-size:11.5px;color:var(--ink-3);padding:0;margin:2px 0 12px 0;border:0;}
+.card > svg{margin-top:2px;}
+.card .card-note{font-size:11.5px;color:var(--ink-2);line-height:1.55;margin:12px 0 0 0;padding:10px 0 0 0;border-top:1px solid var(--line-2);}
+.card .card-note code,.card-note code{font-family:var(--mn);font-size:11px;background:var(--surf-2);padding:1px 4px;border-radius:2px;}
+.grid-2{display:grid;grid-template-columns:1.35fr 1fr;gap:12px;margin-bottom:12px;align-items:start;}
+.grid-1{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px;}
+@media (max-width:1100px){.grid-2{grid-template-columns:1fr;}}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;margin:14px 0;border:1px solid var(--line);background:var(--surf);}
+.kpi{border:0;border-right:1px solid var(--line);padding:10px 13px;}
+.kpi:last-child{border-right:0;}
+.kpi .bar{display:none;}
+.kpi .label{font-family:var(--mn);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;}
+.kpi .value{font-family:var(--mn);font-size:19px;font-weight:600;color:var(--ink);line-height:1.15;}
+.kpi .delta{font-size:11px;color:var(--ink-3);margin-top:4px;}
+.kpi .delta.up,.kpi .delta.down,.kpi .delta.warn{color:var(--ink-3);}
+.case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:12px;border:1px solid var(--line);background:var(--surf);}
+.case-kpi{border:0;border-right:1px solid var(--line);padding:9px 12px;text-align:left;}
+.case-kpi:last-child{border-right:0;}
+.case-kpi .n{font-family:var(--mn);font-size:17px;font-weight:600;}
+.case-kpi .l{font-family:var(--mn);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:2px;}
+.callout{border:0;border-left:2px solid var(--line);border-radius:0;background:transparent;padding:1px 0 1px 12px;
+  font-size:12.5px;line-height:1.55;margin:14px 0;display:flex;gap:10px;align-items:flex-start;color:var(--ink-2);}
+.callout b{color:var(--ink);font-weight:600;}
+.callout .icon{display:none;}
+.callout.amber{border-left-color:var(--alert);}
+.callout.amber b{color:var(--alert);}
+.defect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0;border:1px solid var(--line);background:var(--surf);}
+.defect-item{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:9px;align-items:flex-start;}
+.defect-item .tick{flex-shrink:0;width:14px;height:14px;border-radius:2px;background:var(--surf-3);border:0;
+  color:var(--ink-2);font-size:9px;line-height:1;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.defect-item .t{font-size:12px;font-weight:600;margin-bottom:2px;}
+.defect-item .d{font-size:11.5px;color:var(--ink-2);line-height:1.45;}
+.code-card{margin-bottom:12px;padding:13px 15px 15px 15px;}
+.code-card .num{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:2px;
+  background:var(--chrome);color:#fff;font-family:var(--mn);font-size:10px;font-weight:600;margin-right:8px;flex-shrink:0;}
+.code-card .card-title{display:flex;align-items:center;}
+.src-ref{font-family:var(--mn);font-size:11px;color:var(--ink-2);background:var(--surf-2);border:1px solid var(--line);
+  display:inline-block;padding:3px 8px;border-radius:2px;margin:11px 0 0 0;}
+.code-block{background:var(--chrome);border:0;border-radius:3px;padding:10px 0;overflow-x:auto;margin-top:10px;}
+.code-block .cl{display:flex;padding:0 12px;white-space:pre;}
+.code-block .cl:hover{background:var(--chrome-2);}
+.code-block .ln{flex-shrink:0;width:26px;text-align:right;margin-right:14px;color:#4A5560;font-size:10.5px;font-family:var(--mn);user-select:none;}
+.code-block .cc{font-family:var(--mn);font-size:11.5px;line-height:1.65;color:#D7DEE4;}
+.tok-kw{color:#E8837A;}.tok-str{color:#9BC995;}.tok-com{color:#5C6874;font-style:italic;}
+.tok-num{color:#E4C07A;}.tok-cls{color:#8FB8D8;}
+
+/* the two-denominator measure */
+.measure{padding:12px 14px 11px 14px;}
+.measure+.measure{border-top:0;}
+.measure.fixed,.measure.live{border-left:1px solid var(--line);}
+.measure-cap{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;
+  font-size:11.5px;color:var(--ink-3);margin-bottom:12px;border-bottom:1px solid var(--line-2);padding-bottom:8px;}
+.measure-cap .k{color:var(--ink);font-weight:600;font-size:12px;}
+.pop{margin-bottom:13px;}
+.pop:last-of-type{margin-bottom:2px;}
+.pop-hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px;flex-wrap:wrap;}
+.pop-hd .who{font-size:11.5px;font-weight:600;color:var(--ink-2);}
+.pop-hd .denom{font-family:var(--mn);font-size:10.5px;color:var(--ink-3);}
+.strip{display:flex;height:22px;border:0;border-radius:2px;overflow:hidden;}
+.mseg{min-width:0;overflow:hidden;display:flex;align-items:center;padding:0 7px;transition:flex-grow .16s ease;
+  font-family:var(--mn);font-size:10.5px;white-space:nowrap;}
+.mseg+.mseg{border-left:1px solid #fff;}
+.mseg-tp{background:var(--f1);color:#fff;}
+.mseg-fn{background:var(--alert);color:#fff;}
+.mseg-fp{background:var(--f2);color:#fff;}
+.mseg-tn{background:var(--f3);color:var(--ink-2);}
+.ruler{position:relative;height:17px;}
+.ruler .base{position:absolute;top:0;left:0;right:0;height:1px;background:var(--line);}
+.ruler i{position:absolute;top:0;width:1px;height:3px;background:var(--line);}
+.ruler i.maj{height:5px;background:var(--line);}
+.ruler .lo,.ruler .hi{position:absolute;top:4px;font-family:var(--mn);font-size:9.5px;color:var(--ink-3);}
+.ruler .lo{left:0;}.ruler .hi{right:0;}
+.ledger-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:9px;font-family:var(--mn);font-size:11px;color:var(--ink-2);}
+.ledger-row span{display:inline-flex;align-items:center;gap:6px;}
+.ledger-row .sw{width:8px;height:8px;flex-shrink:0;border:0;border-radius:1px;}
+.ledger-row .sw.tp{background:var(--f1);}.ledger-row .sw.fn{background:var(--alert);}
+.ledger-row .sw.fp{background:var(--f2);}.ledger-row .sw.tn{background:var(--f3);}
+.ledger-row b{color:var(--ink);font-weight:600;}
+.cross{margin-top:11px;padding-top:9px;border-top:1px solid var(--line-2);display:flex;align-items:baseline;
+  gap:9px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-2);}
+.cross .tag{font-family:var(--mn);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--ink-3);padding:0;font-weight:600;white-space:nowrap;}
+.cross b{color:var(--ink);font-weight:600;font-family:var(--mn);}
+.cross > span:last-child{max-width:none;line-height:1.55;}
+input[type=range]{-webkit-appearance:none;appearance:none;height:3px;background:var(--line);outline:none;border-radius:2px;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:13px;height:13px;
+  border-radius:2px;background:var(--chrome);border:0;cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:2px;background:var(--chrome);border:0;cursor:pointer;}
+.axis-line{stroke:var(--line);stroke-width:1;}
+.grid-line{stroke:var(--line-2);stroke-width:1;}
+.axis-tick{font-family:var(--mn);font-size:9.5px;fill:var(--ink-3);}
+.axis-title{font-family:var(--ui);font-size:10px;fill:var(--ink-3);}
+.obj-list,.obj{display:none;}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">R</div>
+      <div>
+        <div class="name">Fraud &amp; DP Console</div>
+        <div class="sub">MSc dissertation results</div>
+      </div>
+    </div>
+
+    <nav class="side-nav" id="side-nav">
+      <div class="nav-section-label">Workspace</div>
+      <div class="nav-item active" data-panel="cases">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 16c.6-1.6 1.9-2.4 3-2.4s2.4.8 3 2.4M14 10h4M14 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Triage queue</span><span class="idx">01</span>
+      </div>
+      <div class="nav-item" data-panel="cost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Privacy calculator</span><span class="idx">02</span>
+      </div>
+      <div class="nav-item" data-panel="guarantee">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Audit explorer</span><span class="idx">03</span>
+      </div>
+      <div class="nav-section-label">Findings</div>
+      <div class="nav-item" data-panel="broke">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 2 L4 14h6l-1 8 9-12h-6l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>What broke</span><span class="idx">04</span>
+      </div>
+      <div class="nav-item" data-panel="proof">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 2h6M10 2v6l-6 12a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L14 8V2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>How we know why</span><span class="idx">05</span>
+      </div>
+      <div class="nav-section-label">System</div>
+      <div class="nav-item" data-panel="built">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="7" r="1" fill="currentColor"/><circle cx="7" cy="17" r="1" fill="currentColor"/></svg>
+        <span>How it was built</span><span class="idx">06</span>
+      </div>
+      <div class="nav-item" data-panel="code">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8.5 7 3 12l5.5 5M15.5 7l5.5 5-5.5 5M13.5 4l-3 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>The mechanism</span><span class="idx">07</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-foot">
+      <span class="status-pill">Where these numbers come from</span>
+      <div class="prov">
+        <div><dt>Source</dt><span class="lead"></span><span class="v">demo_cases.json</span></div>
+        <div><dt>Binding</dt><span class="lead"></span><span class="v">embedded at build</span></div>
+        <div><dt>Checkpoint</dt><span class="lead"></span><span class="v">DP-SGD, oversampled</span></div>
+        <div><dt>Test set</dt><span class="lead"></span><span class="v">16,666 windows</span></div>
+        <div><dt>Sample</dt><span class="lead"></span><span class="v">160 · 40 per outcome</span></div>
+        <div><dt>Seed</dt><span class="lead"></span><span class="v">42</span></div>
+        <div><dt>Accountant</dt><span class="lead"></span><span class="v">Opacus RDP</span></div>
+      </div>
+      <p>Every figure here resolves to one of these files. A number with no line back to an artefact is a claim, not a result.</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="crumb" id="crumb">Workspace</div>
+        <h1 id="topbar-title">Fraud triage</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="seed-pill">
+          <div>dataset<br><b>Elliptic held-out</b></div>
+          <div class="lc">privacy<br><b>&epsilon; 1.828 &middot; &delta; 1e-5</b></div>
+          <div>seed<br><b>42</b></div>
+          <div>accountant<br><b>Opacus RDP</b></div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- ================= PANEL 01 : WHAT BROKE ================= -->
+    <section class="panel" id="panel-broke">
+      <div class="panel-head">
+        <div class="eyebrow">Findings</div>
+        <h2>Collapse and recovery under DP-SGD</h2>
+        <p>The headline result: combining DP-SGD with standard loss-based class weighting removes fraud detection entirely rather than degrading it, and data-level oversampling restores it. Reproduced on three seeds and on a second dataset.</p>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">Baseline recall</div><div class="value mono">0.727</div><div class="delta">non-private, Elliptic</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--amber)"></div><div class="label">Naive DP recall</div><div class="value mono" style="color:var(--amber)">0.000</div><div class="delta warn">0 of 1,081 fraud caught</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--green)"></div><div class="label">Fixed (oversampled)</div><div class="value mono" style="color:var(--green)">0.743</div><div class="delta up">+0.016 vs baseline</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">PaySim scale check</div><div class="value mono">140×</div><div class="delta">larger · 76× rarer fraud</div></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Fraud recall — Elliptic held-out test set</div>
+          <div class="card-sub">Three configurations, identical architecture &amp; split</div>
+          <svg viewBox="0 0 460 250" width="100%" style="max-width:460px; display:block;" role="img" aria-label="Attack AUC by class. Non-private Safe 0.608, non-private Fraud 0.860, DP-SGD Safe 0.686, DP-SGD Fraud 0.630. Bars are measured upward from 0.5, the no-information baseline."><line class="grid-line" x1="52" y1="155.0" x2="440" y2="155.0"/><text class="axis-tick" x="47" y="158.5" text-anchor="end">0.60</text><line class="grid-line" x1="52" y1="110.0" x2="440" y2="110.0"/><text class="axis-tick" x="47" y="113.5" text-anchor="end">0.70</text><line class="grid-line" x1="52" y1="65.0" x2="440" y2="65.0"/><text class="axis-tick" x="47" y="68.5" text-anchor="end">0.80</text><line class="grid-line" x1="52" y1="20.0" x2="440" y2="20.0"/><text class="axis-tick" x="47" y="23.5" text-anchor="end">0.90</text><line class="axis-line" x1="52" y1="15" x2="52" y2="200"/><line x1="52" y1="200" x2="440" y2="200" stroke="#10151A" stroke-width="1.4" stroke-dasharray="5,3"/><text class="axis-tick" x="47" y="203.5" text-anchor="end">0.50</text><rect x="74" y="151.4" width="68" height="48.6" fill="#10151A"/><text x="108" y="142.4" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.608</text><text x="108" y="219" text-anchor="middle" font-size="10" fill="#59656F">No priv., Safe</text><rect x="164" y="38.0" width="68" height="162.0" fill="#C2352A"/><text x="198" y="29.0" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.860</text><text x="198" y="219" text-anchor="middle" font-size="10" fill="#59656F">No priv., Fraud</text><rect x="254" y="116.3" width="68" height="83.7" fill="#10151A"/><text x="288" y="107.3" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.686</text><text x="288" y="219" text-anchor="middle" font-size="10" fill="#59656F">DP-SGD, Safe</text><rect x="344" y="141.5" width="68" height="58.5" fill="#59656F"/><text x="378" y="132.5" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.630</text><text x="378" y="219" text-anchor="middle" font-size="10" fill="#59656F">DP-SGD, Fraud</text><text x="52" y="238" font-size="10" fill="#59656F" font-style="italic">Bars rise from 0.50 &#8212; the dashed no-information baseline. Height is advantage over guessing, not raw AUC.</text></svg>
+          <div class="card-note">Reproduced on three independent seeds — every run of the reweighted configuration gives exactly 0.000.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Why it collapses</div>
+          <div class="card-sub">Gradient clipping under DP-SGD</div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+            <div style="background:var(--blue-tint); border-radius:8px; padding:10px 12px; font-size:12.5px; color:#E8B4AE;">10× class weight applied to fraud loss</div>
+            <div style="text-align:center; color:var(--faint); font-size:16px;">↓ clipped to a fixed per-sample norm</div>
+            <div style="background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:12.5px; color:var(--muted);">1× effective contribution reaches the optimiser</div>
+          </div>
+          <div class="card-note">The weight is unmistakably active in the objective (training loss ×3.6) and unmistakably inert in the result — see Section 02.</div>
+        </div>
+      </div>
+
+      <div class="callout amber"><span class="icon">⚠</span><div><b>Not degraded — eliminated.</b> The textbook remedy for rare-class detection does not lose accuracy under DP-SGD. It stops making fraud predictions at all, while the privacy accountant still reports a perfectly healthy ε.</div></div>
+
+      <div class="card" style="margin-top:4px;">
+        <div class="card-title">Confirmed on a second, unrelated dataset — PaySim</div>
+        <div class="card-sub">6.36M rows · 0.13% fraud · tabular, not graph-structured</div>
+        <div class="kpi-grid" style="margin:14px 0 0 0;">
+          <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">Baseline</div><div class="value mono">0.720</div></div>
+          <div class="kpi"><div class="bar" style="background:var(--amber)"></div><div class="label">Collapse</div><div class="value mono" style="color:var(--amber)">0.080</div></div>
+          <div class="kpi"><div class="bar" style="background:var(--green)"></div><div class="label">Recovery (200× os.)</div><div class="value mono" style="color:var(--green)">0.859</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANEL 02 : HOW WE KNOW WHY ================= -->
+    <section class="panel" id="panel-proof">
+      <div class="panel-head">
+        <div class="eyebrow">Findings</div>
+        <h2>Control experiments</h2>
+        <p>"What broke" shows <em>that</em> the model collapses. These three controlled experiments are the evidence for <em>why</em> — each varies exactly one thing against the seed-42 configuration.</p>
+      </div>
+      <div class="panel-pitch">Already walked through in the presentation slides — kept here for Q&amp;A reference, not re-narrated live.
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Control 1 — remove the class weight entirely</div>
+          <div class="card-sub">If clipping cancels the weight, this should change nothing</div>
+          <table class="detail-table">
+            <tr><td>Final train loss, 1:10 weight</td><td>1.171</td></tr>
+            <tr><td>Final train loss, unweighted</td><td>0.327</td></tr>
+            <tr><td>Fraud recall, both runs</td><td style="color:var(--amber)">0.000</td></tr>
+            <tr><td>Avg. precision, weighted / unweighted</td><td>0.419 / 0.420</td></tr>
+          </table>
+          <div class="card-note">A tenfold change in how the objective punishes minority errors produces, to three decimal places, the same model.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Control 2 — isolate DP's cost from oversampling's cost</div>
+          <div class="card-sub">Same 5× oversampling fix, with and without DP-SGD attached</div>
+          <table class="detail-table">
+            <tr><td>Non-private, no oversampling</td><td>0.727 recall · F1 0.691</td></tr>
+            <tr><td>Non-private + 5× oversampling</td><td style="color:var(--green)">0.609 recall · F1 0.766</td></tr>
+            <tr><td>DP-SGD + 5× oversampling</td><td style="color:var(--amber)">0.743 recall · F1 0.626</td></tr>
+          </table>
+          <div class="card-note">Oversampling alone is not harmful — it trades recall for precision and <em>improves</em> Macro F1 (0.691→0.766). The headline finding's F1 damage (0.691→0.626) is attributable to DP specifically, not to the remedy chosen for it. Source: <code>results/metrics/training_metrics_baseline_ctrl_oversampled.json</code>.</div>
+        </div>
+      </div>
+
+      <div class="grid-1">
+        <div class="card">
+          <div class="card-title">Control 3 — loosen the clip</div>
+          <div class="card-sub">max_grad_norm swept on the reweighted run (log scale)</div>
+          <svg viewBox="0 0 460 230" width="100%" style="max-width:460px; display:block;">
+            <line x1="40" y1="20" x2="40" y2="190" stroke="#DFE4E8" stroke-width="1.5"/>
+            <line x1="40" y1="190" x2="420" y2="190" stroke="#DFE4E8" stroke-width="1.5"/>
+            <polyline points="80,190 250,50.7 400,22.2" fill="none" stroke="#10151A" stroke-width="2.4"/>
+            <circle cx="80" cy="190" r="4" fill="#10151A"/><circle cx="250" cy="50.7" r="4" fill="#10151A"/><circle cx="400" cy="22.2" r="4" fill="#10151A"/>
+            <polyline points="80,110.4 250,135.8 400,164.6" fill="none" stroke="#C2352A" stroke-width="2.4"/>
+            <circle cx="80" cy="110.4" r="4" fill="#C2352A"/><circle cx="250" cy="135.8" r="4" fill="#C2352A"/><circle cx="400" cy="164.6" r="4" fill="#C2352A"/>
+            <text x="80" y="206" text-anchor="middle" font-size="10.5" fill="#59656F">1.0</text>
+            <text x="250" y="206" text-anchor="middle" font-size="10.5" fill="#59656F">10.0</text>
+            <text x="400" y="206" text-anchor="middle" font-size="10.5" fill="#59656F">100.0</text>
+            <circle cx="440" cy="55" r="4" fill="#10151A"/><text x="0" y="16" font-size="11" fill="#10151A" font-weight="600">— recall (0.000 → 0.982)</text>
+            <text x="230" y="16" font-size="11" fill="#C2352A" font-weight="600">— avg. precision (0.419 → 0.119)</text>
+          </svg>
+          <div class="card-note">Recall recovers as the clip loosens — the model's ranking quality falls over the same range. The recall is real; the model is worse.</div>
+        </div>
+      </div>
+
+      <div class="callout blue"><span class="icon">ℹ</span><div><b>The asymmetry is the argument.</b> The same knob swept over the <em>oversampling</em> fix moves recall by only 0.005. Clipping is decisive for a remedy that works through gradient magnitude, and nearly inert for one that works through gradient count.</div></div>
+    </section>
+
+    <!-- ================= PANEL 03 : WHAT PRIVACY COSTS ================= -->
+    <section class="panel" id="panel-cost">
+      <div class="panel-head">
+        <div class="eyebrow">Review</div>
+        <h2>Utility across privacy budgets</h2>
+        <p>Six privacy budgets with the oversampling fix held constant. Recall alone lies here — read precision and Macro F1 alongside it. The right-hand card below is live — drag it.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Fraud recall &amp; precision across the <span class="lc">ε</span> sweep</div>
+          <div class="card-sub">Tightening privacy →</div>
+          <svg viewBox="0 0 500 244" width="100%" style="max-width:500px; display:block;" role="img" aria-label="Fraud recall, precision and Macro F1 across six privacy budgets, all on one 0 to 1 scale">
+            <line class="grid-line" x1="46" y1="190.0" x2="474" y2="190.0"/><text class="axis-tick" x="41" y="193.5" text-anchor="end">0.00</text><line class="grid-line" x1="46" y1="150.0" x2="474" y2="150.0"/><text class="axis-tick" x="41" y="153.5" text-anchor="end">0.25</text><line class="grid-line" x1="46" y1="110.0" x2="474" y2="110.0"/><text class="axis-tick" x="41" y="113.5" text-anchor="end">0.50</text><line class="grid-line" x1="46" y1="70.0" x2="474" y2="70.0"/><text class="axis-tick" x="41" y="73.5" text-anchor="end">0.75</text><line class="grid-line" x1="46" y1="30.0" x2="474" y2="30.0"/><text class="axis-tick" x="41" y="33.5" text-anchor="end">1.00</text>
+            <line class="axis-line" x1="46" y1="30" x2="46" y2="190"/>
+            <line class="axis-line" x1="46" y1="190" x2="474" y2="190"/>
+            <text class="axis-tick" x="70" y="205" text-anchor="middle">26.28</text><text class="axis-tick" x="150" y="205" text-anchor="middle">5.49</text><text class="axis-tick" x="230" y="205" text-anchor="middle">1.83</text><text class="axis-tick" x="310" y="205" text-anchor="middle">1.07</text><text class="axis-tick" x="390" y="205" text-anchor="middle">0.71</text><text class="axis-tick" x="460" y="205" text-anchor="middle">0.43</text>
+            <text class="axis-title" x="260" y="222" text-anchor="middle">FINAL &#949; — TIGHTENING PRIVACY &#8594;</text>
+            
+            <polyline points="70,73.2 150,72.2 230,71.1 310,70.3 390,68.6 460,66.5"  fill="none" stroke="#10151A" stroke-width="2.2"/>
+            <polyline points="70,78.0 150,84.9 230,89.8 310,92.9 390,96.4 460,101.0"  fill="none" stroke="#59656F" stroke-width="2.2" stroke-dasharray="5 3"/>
+            <polyline points="70,135.9 150,146.5 230,152.9 310,156.2 390,159.4 460,163.3" fill="none" stroke="#C2352A" stroke-width="2.2"/>
+            <circle cx="70" cy="73.2" r="2.6" fill="#10151A"/><circle cx="150" cy="72.2" r="2.6" fill="#10151A"/><circle cx="230" cy="71.1" r="2.6" fill="#10151A"/><circle cx="310" cy="70.3" r="2.6" fill="#10151A"/><circle cx="390" cy="68.6" r="2.6" fill="#10151A"/><circle cx="460" cy="66.5" r="2.6" fill="#10151A"/><circle cx="70" cy="78.0" r="2.6" fill="#59656F"/><circle cx="150" cy="84.9" r="2.6" fill="#59656F"/><circle cx="230" cy="89.8" r="2.6" fill="#59656F"/><circle cx="310" cy="92.9" r="2.6" fill="#59656F"/><circle cx="390" cy="96.4" r="2.6" fill="#59656F"/><circle cx="460" cy="101.0" r="2.6" fill="#59656F"/><circle cx="70" cy="135.9" r="2.6" fill="#C2352A"/><circle cx="150" cy="146.5" r="2.6" fill="#C2352A"/><circle cx="230" cy="152.9" r="2.6" fill="#C2352A"/><circle cx="310" cy="156.2" r="2.6" fill="#C2352A"/><circle cx="390" cy="159.4" r="2.6" fill="#C2352A"/><circle cx="460" cy="163.3" r="2.6" fill="#C2352A"/>
+            <g font-family="Menlo,monospace" font-size="9.5"><rect x="46" y="8" width="14" height="2.5" fill="#10151A"/><text x="64" y="14" fill="#10151A">recall 0.730&#8594;0.772</text><rect x="200" y="8" width="14" height="2.5" fill="#59656F"/><text x="218" y="14" fill="#59656F">Macro F1 0.700&#8594;0.556</text><rect x="368" y="8" width="14" height="2.5" fill="#C2352A"/><text x="386" y="14" fill="#C2352A">prec 0.338&#8594;0.167</text></g>
+          </svg>
+          <div class="card-note">All three series share one 0&ndash;1 scale, so they can be read against each other. Recall (solid black) is the only one that rises. Precision and Macro F1 &mdash; the two that actually track classifier quality &mdash; fall monotonically across the same range. Recall rises because the model increasingly defaults to &ldquo;fraud&rdquo; as noise grows, not because detection improves.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Live group-privacy calculator</div>
+          <div class="card-sub">Drag k — the number of duplicate copies per record — and watch the accountant's real output degrade</div>
+          <div style="display:flex; align-items:center; gap:14px; margin:10px 0 14px 0;">
+            <input type="range" id="k-slider" min="1" max="8" step="1" value="5" oninput="onKChange(this.value)" style="flex:1; accent-color:var(--amber);">
+            <div class="mono" style="font-size:15px; font-weight:700; min-width:56px;">k = <span id="k-val">5</span></div>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <div style="flex:1; text-align:center; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 10px;">
+              <div style="font-size:10.5px; color:var(--muted); letter-spacing:.12em; margin-bottom:8px; font-family:var(--reg);">reported (k=1 baseline)</div>
+              <div class="mono" style="font-size:20px; font-weight:700; color:var(--blue-bright);">ε = 1.828</div>
+              <div class="mono" style="font-size:12px; color:var(--muted); margin-top:4px;">δ = 1e-5</div>
+            </div>
+            <div style="flex:1; text-align:center; background:var(--amber-tint); border:1px solid #59656F; border-radius:10px; padding:16px 10px;">
+              <div style="font-size:10.5px; color:var(--stamp); letter-spacing:.12em; margin-bottom:8px; font-family:var(--reg); font-weight:700;">corrected for k copies</div>
+              <div class="mono" style="font-size:20px; font-weight:700; color:var(--amber);" id="k-eps">ε ≈ 9.14</div>
+              <div class="mono" style="font-size:12px; margin-top:4px;" id="k-delta">δ ≈ 0.0749</div>
+            </div>
+          </div>
+          <div class="card-note">Live arithmetic on the real accountant's own numbers: (ε, δ) → (kε, k·e<sup>(k−1)ε</sup>·δ), following <code>hpc/train.py</code>'s actual <code>privacy_engine.get_epsilon(delta=delta)</code> call, just corrected for k duplicate copies per record. k=5 is what the thesis actually trained with. δ grows so much faster than ε that by k≈7 it already exceeds 1 — a mathematical impossibility for a probability, flagged below rather than displayed as a number.</div>
+        </div>
+      </div>
+
+      <div class="card grid-1" style="margin-bottom:18px;"><div class="card-title">The sweep, as tabulated</div><div class="card-sub">Thesis Table 4.4 &middot; oversampling held constant at 5&times; throughout &middot; nominal &delta; = 1e-5</div><table class="detail-table" style="margin-top:14px;"><thead><tr><td style="text-align:left;">noise multiplier</td><td style="text-align:left;">final <span class="lc">&#949;</span></td><td style="text-align:left;">fraud recall</td><td style="text-align:left;">fraud precision</td><td style="text-align:left;">macro F1</td><td></td></tr></thead><tbody><tr><td class="mono">0.4</td><td class="mono">26.277</td><td class="mono">0.730</td><td class="mono">0.338</td><td class="mono">0.700</td><td></td></tr><tr><td class="mono">0.7</td><td class="mono">5.486</td><td class="mono">0.736</td><td class="mono">0.272</td><td class="mono">0.657</td><td></td></tr><tr style="background:var(--sheet-2)"><td class="mono">1.1</td><td class="mono">1.828</td><td class="mono">0.743</td><td class="mono">0.232</td><td class="mono">0.626</td><td class="note">deployed configuration</td></tr><tr><td class="mono">1.5</td><td class="mono">1.065</td><td class="mono">0.748</td><td class="mono">0.211</td><td class="mono">0.607</td><td></td></tr><tr><td class="mono">2.0</td><td class="mono">0.711</td><td class="mono">0.759</td><td class="mono">0.191</td><td class="mono">0.585</td><td></td></tr><tr><td class="mono">3.0</td><td class="mono">0.431</td><td class="mono">0.772</td><td class="mono">0.167</td><td class="mono">0.556</td><td></td></tr></tbody></table><div class="card-note">Every <span class="lc">&#949;</span> in this table is a per-record figure carrying the same group-privacy correction as the calculator above &mdash; roughly 5&times; higher per transaction. Recall climbs from 0.730 to 0.772 down the table while precision more than halves and Macro F1 falls 0.144: the single-metric trap this console exists to make visible.</div></div>
+
+      <div class="callout amber"><span class="icon">⚠</span><div><b>The middle number is not a privacy improvement.</b> Oversampling enlarges the training set with duplicates of existing fraud windows, not new individuals — Opacus counts each copy as a separate person.</div></div>
+    </section>
+
+    <!-- ================= PANEL 04 : IS THE GUARANTEE REAL ================= -->
+    <section class="panel" id="panel-guarantee">
+      <div class="panel-head">
+        <div class="eyebrow">Review</div>
+        <h2>Membership-inference risk by class</h2>
+        <p>A membership-inference attack tests the formal ε directly: given only per-sample loss, can an adversary tell which transactions the model trained on? 0.5 = no advantage over guessing. The headline numbers below were in the slides — the explorer underneath is new: toggle it to see the audit's actual sampling methodology, not just its two aggregate bars.</p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">Attack AUC, no privacy</div><div class="value mono">0.606</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--amber)"></div><div class="label">Attack AUC, DP-SGD</div><div class="value mono" style="color:var(--amber)">0.662</div><div class="delta warn">looks worse in aggregate</div></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Attack AUC by class</div>
+          <div class="card-sub">The aggregate number is the wrong thing to read</div>
+          <svg viewBox="0 0 460 240" width="100%" style="max-width:460px; display:block;">
+            <line x1="20" y1="200" x2="440" y2="200" stroke="#DFE4E8" stroke-width="1.5"/>
+            <line x1="20" y1="200" x2="440" y2="200" stroke="#59656F" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="435" y="196" text-anchor="end" font-size="10" fill="#59656F">0.5 — guessing</text>
+            <rect x="40" y="151.4" width="70" height="48.6" rx="4" fill="#10151A"/>
+            <text x="75" y="140" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.608</text>
+            <text x="75" y="220" text-anchor="middle" font-size="10.5" fill="#59656F">No priv., Safe</text>
+            <rect x="130" y="38" width="70" height="162" rx="4" fill="#C2352A"/>
+            <text x="165" y="26" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.860</text>
+            <text x="165" y="220" text-anchor="middle" font-size="10.5" fill="#59656F">No priv., Fraud</text>
+            <rect x="240" y="116.3" width="70" height="83.7" rx="4" fill="#10151A"/>
+            <text x="275" y="104" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.686</text>
+            <text x="275" y="220" text-anchor="middle" font-size="10.5" fill="#59656F">DP-SGD, Safe</text>
+            <rect x="330" y="141.5" width="70" height="58.5" rx="4" fill="#59656F"/>
+            <text x="365" y="129" text-anchor="middle" class="mono" font-size="12.5" font-weight="700" fill="#10151A">0.630</text>
+            <text x="365" y="220" text-anchor="middle" font-size="10.5" fill="#59656F">DP-SGD, Fraud</text>
+          </svg>
+        </div>
+        <div class="card">
+          <div class="card-title">Exposure, before → after DP-SGD</div>
+          <table class="detail-table">
+            <tr><td>Fraud-class exposure</td><td style="color:var(--green)">0.860 → 0.630</td></tr>
+            <tr><td>Safe-class exposure</td><td style="color:var(--amber)">0.608 → 0.686</td></tr>
+          </table>
+          <div class="callout green" style="margin-top:14px;"><span class="icon">✓</span><div><b>Redistributed, not uniformly reduced.</b> DP-SGD protects exactly the class with the most to lose from being identifiable as training data — fraud, which memorises easily because examples are scarce — while the cost lands on the class that had little to lose.</div></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Audit explorer — the sampling methodology behind those bars</div>
+        <div class="card-sub">Real values from <code>results/attacks/mia_results_stratified.json</code> — every combination, not just the ones plotted above</div>
+        <div style="display:flex; gap:20px; margin:12px 0 16px 0; flex-wrap:wrap;">
+          <div class="seg" id="mia-config-seg">
+            <button class="active" data-v="baseline_no_dp" onclick="setMiaConfig('baseline_no_dp',this)">Non-private baseline</button>
+            <button data-v="dp_sgd_oversampled" onclick="setMiaConfig('dp_sgd_oversampled',this)">DP-SGD, oversampled</button>
+          </div>
+          <div class="seg" id="mia-class-seg">
+            <button class="active" data-v="Safe" onclick="setMiaClass('Safe',this)">Safe class</button>
+            <button data-v="Fraud" onclick="setMiaClass('Fraud',this)">Fraud class</button>
+          </div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">Attack AUC</div><div class="value mono" id="mia-auc">–</div></div>
+          <div class="kpi"><div class="bar" style="background:var(--green)"></div><div class="label">Mean member loss</div><div class="value mono" id="mia-mloss">–</div></div>
+          <div class="kpi"><div class="bar" style="background:var(--amber)"></div><div class="label">Mean non-member loss</div><div class="value mono" id="mia-nloss">–</div></div>
+        </div>
+        <div class="card-note" id="mia-sampling">&nbsp;</div>
+      </div>
+    </section>
+
+    <!-- ================= PANEL 05 : REAL CASES ================= -->
+    <section class="panel active" id="panel-cases">
+
+      <div class="mstrip">
+        <div><div class="k">Model</div><div class="v" style="font-size:13px;">DP-SGD</div><div class="s">5&times; oversampled</div></div>
+        <div><div class="k">Fraud caught</div><div class="v">803</div><div class="s">of 1,081 &middot; recall 0.743</div></div>
+        <div><div class="k">Missed</div><div class="v bad">278</div><div class="s">of 1,081</div></div>
+        <div><div class="k">False alarms</div><div class="v">2,663</div><div class="s">of 15,585 cleared traffic</div></div>
+        <div><div class="k">Precision</div><div class="v">0.232</div><div class="s">803 of 3,466 flags &mdash; about 4 false alarms per fraud caught</div></div>
+      </div>
+
+      <div class="ws">
+        <div class="ws-col">
+          <div class="ws-hd"><span class="t">Case queue</span><span class="queue-count" id="queue-count">&nbsp;</span></div>
+          <div class="seg" id="case-seg">
+            <button class="active" onclick="filterQueue('all',this)">All</button>
+            <button onclick="filterQueue('tp',this)">Caught</button>
+            <button onclick="filterQueue('fn',this)">Missed</button>
+            <button onclick="filterQueue('fp',this)">False alarm</button>
+            <button onclick="filterQueue('tn',this)">Cleared</button>
+          </div>
+          <div class="ws-body"><div class="queue-list" id="queue-list"></div></div>
+          <div class="ws-foot"><div class="measure live" style="margin-bottom:16px;">
+        <div class="measure-cap">
+          <span class="k">Live recomputation · 160-case sample</span>
+          <span class="lc">recomputed in the browser from each case's true label &amp; fraud probability</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:18px; margin:0 0 20px 0; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--rule-2);">
+          <span class="who" style="font-family:var(--reg); font-size:10.5px; text-transform:uppercase; letter-spacing:.13em; font-weight:700;">Decision threshold</span>
+          <input type="range" id="thresh-slider" min="0" max="1" step="0.01" value="0.5" oninput="onThresholdChange(this.value)" style="flex:1; min-width:220px;">
+          <div class="mono" style="font-size:19px; font-weight:700; min-width:64px;"><span id="thresh-val">0.50</span></div>
+          <span class="lc" style="font-family:var(--reg); font-size:10.5px; color:var(--ink-2);">flag when p(fraud) &ge; this</span>
+        </div>
+
+        <div class="pop">
+          <div class="pop-hd"><span class="who">Actual fraud in the sample</span><span class="denom" id="den-a">n = 80</span></div>
+          <div class="strip">
+            <div class="mseg mseg-tp" id="seg-tp" style="flex:50"><span id="live-tp">–</span>&nbsp;caught</div>
+            <div class="mseg mseg-fn" id="seg-fn" style="flex:50"><span id="live-fn">–</span>&nbsp;missed</div>
+          </div>
+          <div class="ruler"><span class="base"></span>
+            <i class="maj" style="left:0"></i><i style="left:25%"></i><i class="maj" style="left:50%"></i><i style="left:75%"></i><i class="maj" style="left:100%"></i>
+            <span class="lo">0</span><span class="hi">80 fraud</span>
+          </div>
+          <div class="ledger-row">
+            <span><i class="sw tp"></i>caught <b><span id="led-tp">–</span> / 80</b></span>
+            <span><i class="sw fn"></i>missed <b><span id="led-fn">–</span> / 80</b></span>
+            <span>recall <b id="live-recall">–</b></span>
+          </div>
+        </div>
+
+        <div class="pop">
+          <div class="pop-hd"><span class="who">Actual legitimate traffic in the sample</span><span class="denom" id="den-b">n = 80</span></div>
+          <div class="strip">
+            <div class="mseg mseg-fp" id="seg-fp" style="flex:50"><span id="live-fp">–</span>&nbsp;false alarms</div>
+            <div class="mseg mseg-tn" id="seg-tn" style="flex:50"><span id="live-tn">–</span>&nbsp;cleared</div>
+          </div>
+          <div class="ruler"><span class="base"></span>
+            <i class="maj" style="left:0"></i><i style="left:25%"></i><i class="maj" style="left:50%"></i><i style="left:75%"></i><i class="maj" style="left:100%"></i>
+            <span class="lo">0</span><span class="hi">80 legitimate</span>
+          </div>
+          <div class="ledger-row">
+            <span><i class="sw fp"></i>false alarm <b><span id="led-fp">–</span> / 80</b></span>
+            <span><i class="sw tn"></i>cleared <b><span id="led-tn">–</span> / 80</b></span>
+          </div>
+        </div>
+
+        <div class="cross">
+          <span class="tag">Across both</span>
+          <span id="live-cross">–</span>
+        </div>
+
+        <div class="card-note" style="border-top:1px solid var(--rule-2); margin-top:15px; padding:12px 0 0 0;">This sample is deliberately balanced — <b>40 of each outcome</b>, so it begins at 80 fraud against 80 legitimate and moves as you drag. Those are <em>not</em> the proportions of the real test set above, where fraud is roughly 1 in 15. Schedule 1 never changes; this one does.</div>
+      </div></div>
+        </div>
+
+        <div class="ws-col">
+          <div class="ws-hd"><span class="t">Case detail</span><span class="queue-count" id="case-detail-sub">&nbsp;</span></div>
+          <div class="ws-body" style="padding:12px 14px;">
+            <table class="detail-table" id="case-table"></table>
+            <div style="margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);">Why this transaction scored as it did</div>
+            <svg viewBox="0 0 300 150" width="100%" style="max-width:340px; display:block; margin-top:8px;" id="attr-svg"></svg>
+            <div class="card-note" style="margin-top:10px;">Integrated Gradients over the deployed checkpoint, top four features by magnitude. Feature indices are the dataset's own anonymised column indices &mdash; Elliptic publishes no semantics for them, so these say <em>which</em> feature moved the prediction, never what it means.</div>
+            
+            
+            <div style="margin-top:18px;border-top:1px solid var(--line-2);padding-top:14px;">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px;">Model performance, full held-out test set</div>
+              <div class="measure fixed">
+        <div class="measure-cap">
+          <span class="k">Full held-out test set · 16,666 windows</span>
+          <span class="lc">fixed at threshold 0.50 · does not respond to the control below</span>
+        </div>
+
+        <div class="pop">
+          <div class="pop-hd"><span class="who">Of the fraud that was actually there</span><span class="denom">n = 1,081</span></div>
+          <div class="strip" role="img" aria-label="Of 1,081 actual fraud cases, 803 were caught and 278 missed">
+            <div class="mseg mseg-tp" style="flex:74.28">803 caught</div>
+            <div class="mseg mseg-fn" style="flex:25.72">278 missed</div>
+          </div>
+          <div class="ruler"><span class="base"></span>
+            <i class="maj" style="left:0"></i><i style="left:25%"></i><i class="maj" style="left:50%"></i><i style="left:75%"></i><i class="maj" style="left:100%"></i>
+            <span class="lo">0</span><span class="hi">1,081 fraud</span>
+          </div>
+          <div class="ledger-row">
+            <span><i class="sw tp"></i>caught <b>803 / 1,081</b></span>
+            <span><i class="sw fn"></i>missed <b>278 / 1,081</b></span>
+            <span>recall <b>0.743</b></span>
+          </div>
+        </div>
+
+        <div class="pop">
+          <div class="pop-hd"><span class="who">Of the legitimate traffic it had to leave alone</span><span class="denom">n = 15,585</span></div>
+          <div class="strip" role="img" aria-label="Of 15,585 legitimate cases, 2,663 were false alarms and 12,922 correctly cleared">
+            <div class="mseg mseg-fp" style="flex:17.09">2,663 false alarms</div>
+            <div class="mseg mseg-tn" style="flex:82.91">12,922 correctly cleared</div>
+          </div>
+          <div class="ruler"><span class="base"></span>
+            <i class="maj" style="left:0"></i><i style="left:25%"></i><i class="maj" style="left:50%"></i><i style="left:75%"></i><i class="maj" style="left:100%"></i>
+            <span class="lo">0</span><span class="hi">15,585 legitimate</span>
+          </div>
+          <div class="ledger-row">
+            <span><i class="sw fp"></i>false alarm <b>2,663 / 15,585</b></span>
+            <span><i class="sw tn"></i>cleared <b>12,922 / 15,585</b></span>
+          </div>
+        </div>
+
+        <div class="cross">
+          <span class="tag">Across both</span>
+          <span>The model raised <b>3,466</b> flags in total — <b>803</b> of them were fraud. Precision <b>803 / 3,466 = 0.232</b>. Roughly four false alarms for every fraud caught: the honest cost of that 0.743 recall.</span>
+        </div>
+      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANEL 06 : HOW IT WAS BUILT ================= -->
+    <section class="panel" id="panel-built">
+      <div class="panel-head">
+        <div class="eyebrow">System</div>
+        <h2>Data pipeline and reproducibility</h2>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">GPU speed-up</div><div class="value mono">17.08×</div><div class="delta">over CPU pandas</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--blue)"></div><div class="label">Rows processed</div><div class="value mono">6.36M</div><div class="delta">PaySim, full dataset</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--green)"></div><div class="label">Random seed</div><div class="value mono">42</div><div class="delta">logged per run</div></div>
+        <div class="kpi"><div class="bar" style="background:var(--green)"></div><div class="label">Defects found &amp; fixed</div><div class="value mono">5</div><div class="delta up">all regression-tested</div></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Seconds to load &amp; encode 6.36M rows</div>
+          <svg viewBox="0 0 320 190" width="100%" style="max-width:320px; display:block;">
+            <line x1="20" y1="160" x2="300" y2="160" stroke="#DFE4E8" stroke-width="1.5"/>
+            <rect x="50" y="1.6" width="70" height="158.4" rx="4" fill="#C2352A"/>
+            <text x="85" y="-4" transform="translate(0,20)" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#FFFFFF">8.20s</text>
+            <text x="85" y="178" text-anchor="middle" font-size="11" fill="#59656F">CPU (pandas)</text>
+            <rect x="170" y="150.8" width="70" height="9.2" rx="3" fill="#10151A"/>
+            <text x="205" y="140" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#10151A">0.48s</text>
+            <text x="205" y="178" text-anchor="middle" font-size="11" fill="#59656F">GPU (cuDF)</text>
+          </svg>
+          <div class="card-note">NVIDIA H100 NVL, zero-copy transfer keeps data in GPU memory throughout.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Five defects, found and fixed before any figure could be trusted</div>
+          <div class="defect-grid" style="margin-top:10px;">
+            <div class="defect-item"><span class="tick">✓</span><div><div class="t">Non-deterministic inference</div><div class="d">Encoder sampled noise even at eval time</div></div></div>
+            <div class="defect-item"><span class="tick">✓</span><div><div class="t">Unmatched baseline</div><div class="d">DP &amp; non-DP models saw different inputs</div></div></div>
+            <div class="defect-item"><span class="tick">✓</span><div><div class="t">Unordered windows</div><div class="d">No sort before building sliding windows</div></div></div>
+            <div class="defect-item"><span class="tick">✓</span><div><div class="t">No random seeding</div><div class="d">Same config, different results every run</div></div></div>
+            <div class="defect-item"><span class="tick">✓</span><div><div class="t">A leakage channel</div><div class="d">Row order itself carried exploitable signal</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PANEL 07 : THE MECHANISM ================= -->
+    <section class="panel" id="panel-code">
+      <div class="panel-head">
+        <div class="eyebrow">System</div>
+        <h2>Source excerpts</h2>
+        <p>Three real excerpts, file and line cited so every claim above is independently checkable. Narrated here rather than executed live — the training run behind excerpt 2 takes hours on the HPC cluster's GPU node, which is not a place a viva demo should depend on.</p>
+      </div>
+
+      <div class="callout blue"><span class="icon">ℹ</span><div><b>Verbatim, not reconstructed.</b> Every line below is copied exactly from the checked-in source, including its comments — nothing paraphrased, no line numbers invented.</div></div>
+
+      <div class="grid-1">
+        <div class="card code-card">
+          <div class="card-title"><span class="num">1</span>A GRU turns five transactions into one score</div>
+          <div class="card-sub">The architecture's temporal half — not a generic MLP over flattened features</div>
+          <div class="src-ref">src/model_arch.py · lines 46–66</div>
+          <div class="code-block">
+            <div class="cl"><span class="ln">46</span><span class="cc"><span class="tok-kw">class</span> <span class="tok-cls">TemporalGatedAggregator</span>(nn.Module):</span></div>
+            <div class="cl"><span class="ln">47</span><span class="cc">    <span class="tok-kw">def</span> __init__(self, latent_dim, hidden_dim):</span></div>
+            <div class="cl"><span class="ln">48</span><span class="cc">        super(<span class="tok-cls">TemporalGatedAggregator</span>, self).__init__()</span></div>
+            <div class="cl"><span class="ln">49</span><span class="cc">        self.gru = nn.GRU(latent_dim, hidden_dim, batch_first=<span class="tok-kw">True</span>)</span></div>
+            <div class="cl"><span class="ln">50</span><span class="cc"></span></div>
+            <div class="cl"><span class="ln">51</span><span class="cc">    <span class="tok-kw">def</span> forward(self, x_sequence):</span></div>
+            <div class="cl"><span class="ln">52</span><span class="cc">        output, _ = self.gru(x_sequence)</span></div>
+            <div class="cl"><span class="ln">53</span><span class="cc">        <span class="tok-kw">return</span> output[:, -<span class="tok-num">1</span>, :]</span></div>
+            <div class="cl"><span class="ln">54</span><span class="cc"></span></div>
+            <div class="cl"><span class="ln">55</span><span class="cc"><span class="tok-kw">class</span> <span class="tok-cls">FraudDetector</span>(nn.Module):</span></div>
+            <div class="cl"><span class="ln">56</span><span class="cc">    <span class="tok-kw">def</span> __init__(self, input_dim, latent_dim, hidden_dim):</span></div>
+            <div class="cl"><span class="ln">57</span><span class="cc">        super(<span class="tok-cls">FraudDetector</span>, self).__init__()</span></div>
+            <div class="cl"><span class="ln">58</span><span class="cc">        self.encoder = <span class="tok-cls">FeatureBottleneckEncoder</span>(input_dim, latent_dim)</span></div>
+            <div class="cl"><span class="ln">59</span><span class="cc">        self.aggregator = <span class="tok-cls">TemporalGatedAggregator</span>(latent_dim, hidden_dim)</span></div>
+            <div class="cl"><span class="ln">60</span><span class="cc">        self.classifier = nn.Linear(hidden_dim, <span class="tok-num">2</span>)</span></div>
+            <div class="cl"><span class="ln">61</span><span class="cc"></span></div>
+            <div class="cl"><span class="ln">62</span><span class="cc">    <span class="tok-kw">def</span> forward(self, x_sequence):</span></div>
+            <div class="cl"><span class="ln">63</span><span class="cc">        <span class="tok-com"># 3D sequence passed directly to match the RACC2 training environment</span></span></div>
+            <div class="cl"><span class="ln">64</span><span class="cc">        encoded_seq = self.encoder(x_sequence)</span></div>
+            <div class="cl"><span class="ln">65</span><span class="cc">        temporal_features = self.aggregator(encoded_seq)</span></div>
+            <div class="cl"><span class="ln">66</span><span class="cc">        <span class="tok-kw">return</span> self.classifier(temporal_features)</span></div>
+          </div>
+          <div class="card-note">TemporalGatedAggregator wraps a single <code>nn.GRU</code>; FraudDetector.forward() chains the encoder's per-transaction embeddings through it and keeps only the final hidden state — <code>output[:, -1, :]</code> — as the representation of the whole 5-transaction window. That is the model reading a motif across transactions, not scoring one transaction in isolation.</div>
+        </div>
+
+        <div class="card code-card">
+          <div class="card-title"><span class="num">2</span>Where the class weight dies: reweighting and clipping, eight lines apart</div>
+          <div class="card-sub">The actual DP-SGD training script — confirmed in this repo, not reconstructed from the writeup</div>
+          <div class="src-ref">hpc/train.py · lines 147–162</div>
+          <div class="code-block">
+            <div class="cl"><span class="ln">147</span><span class="cc">    <span class="tok-kw">if</span> class_weight_minority <span class="tok-kw">is</span> <span class="tok-kw">None</span>:</span></div>
+            <div class="cl"><span class="ln">148</span><span class="cc">        class_weight_minority = <span class="tok-num">10.0</span> <span class="tok-kw">if</span> minority_oversample_factor &lt;= <span class="tok-num">1.0</span> <span class="tok-kw">else</span> <span class="tok-num">1.0</span></span></div>
+            <div class="cl"><span class="ln">149</span><span class="cc">    weights = torch.tensor([<span class="tok-num">1.0</span>, float(class_weight_minority)]).to(device)</span></div>
+            <div class="cl"><span class="ln">150</span><span class="cc">    criterion = nn.CrossEntropyLoss(weight=weights)</span></div>
+            <div class="cl"><span class="ln">151</span><span class="cc"></span></div>
+            <div class="cl"><span class="ln">152</span><span class="cc">    <span class="tok-com"># 4. Attach Privacy Engine (ONLY to the training loader)</span></span></div>
+            <div class="cl"><span class="ln">153</span><span class="cc">    print(<span class="tok-str">"Attaching Opacus Differential Privacy Engine..."</span>)</span></div>
+            <div class="cl"><span class="ln">154</span><span class="cc">    privacy_engine = <span class="tok-cls">PrivacyEngine</span>()</span></div>
+            <div class="cl"><span class="ln">155</span><span class="cc"></span></div>
+            <div class="cl"><span class="ln">156</span><span class="cc">    model, optimizer, train_loader = privacy_engine.make_private(</span></div>
+            <div class="cl"><span class="ln">157</span><span class="cc">        module=model,</span></div>
+            <div class="cl"><span class="ln">158</span><span class="cc">        optimizer=optimizer,</span></div>
+            <div class="cl"><span class="ln">159</span><span class="cc">        data_loader=train_loader,</span></div>
+            <div class="cl"><span class="ln">160</span><span class="cc">        noise_multiplier=noise_multiplier,</span></div>
+            <div class="cl"><span class="ln">161</span><span class="cc">        max_grad_norm=max_grad_norm,</span></div>
+            <div class="cl"><span class="ln">162</span><span class="cc">    )</span></div>
+          </div>
+          <div class="card-note">Line 149 sets a real 10× loss weight on fraud. Eight lines later, line 161 hands the model to Opacus's <code>make_private()</code> with a per-sample gradient clip — which renormalises every sample's gradient to the same L2 budget regardless of how the loss weighted it. This is the single interaction the whole thesis is about (Finding 01): the weight is genuine in the objective and cancelled before the optimiser ever sees it.</div>
+        </div>
+
+        <div class="card code-card">
+          <div class="card-title"><span class="num">3</span>The ordering fix: the leaking tiebreak and its replacement, both still in the file</div>
+          <div class="card-sub">Not a git-diff reconstruction — both branches are live, real code in the current file</div>
+          <div class="src-ref">hpc/data_loader.py · lines 111–121</div>
+          <div class="code-block">
+            <div class="cl"><span class="ln">111</span><span class="cc">    <span class="tok-kw">if</span> tiebreak == <span class="tok-str">"txid"</span>:</span></div>
+            <div class="cl"><span class="ln">112</span><span class="cc">        print(f<span class="tok-str">"Sorting by ({time_col_name}, txId) for a total, deterministic order..."</span>)</span></div>
+            <div class="cl"><span class="ln">113</span><span class="cc">        df_labeled = df_labeled.sort_values([time_col_name, <span class="tok-str">'txId'</span>]).reset_index(drop=<span class="tok-kw">True</span>)</span></div>
+            <div class="cl"><span class="ln">114</span><span class="cc">    <span class="tok-kw">elif</span> tiebreak == <span class="tok-str">"hash"</span>:</span></div>
+            <div class="cl"><span class="ln">115</span><span class="cc">        <span class="tok-com"># A fixed multiplicative hash: deterministic across runs, but ordering</span></span></div>
+            <div class="cl"><span class="ln">116</span><span class="cc">        <span class="tok-com"># tied rows independently of txId's own sequence, so any structure</span></span></div>
+            <div class="cl"><span class="ln">117</span><span class="cc">        <span class="tok-com"># carried by txId cannot leak into the window composition.</span></span></div>
+            <div class="cl"><span class="ln">118</span><span class="cc">        print(f<span class="tok-str">"Sorting by ({time_col_name}, hash(txId)) -- deterministic, txId-decorrelated..."</span>)</span></div>
+            <div class="cl"><span class="ln">119</span><span class="cc">        df_labeled[<span class="tok-str">'_tb'</span>] = (df_labeled[<span class="tok-str">'txId'</span>].astype(<span class="tok-str">'int64'</span>) * <span class="tok-num">2654435761</span>) % <span class="tok-num">4294967296</span></span></div>
+            <div class="cl"><span class="ln">120</span><span class="cc">        df_labeled = df_labeled.sort_values([time_col_name, <span class="tok-str">'_tb'</span>]).reset_index(drop=<span class="tok-kw">True</span>)</span></div>
+            <div class="cl"><span class="ln">121</span><span class="cc">        df_labeled = df_labeled.drop(columns=[<span class="tok-str">'_tb'</span>])</span></div>
+          </div>
+          <div class="card-note"><code>tiebreak="txid"</code> (line 111) is the historical, contaminated ordering: kept in the code only because it reproduces the run that exposed the leak — a model with zero real signal still reached 0.48 fraud recall under it. <code>tiebreak="hash"</code> (line 114), now the default, orders tied rows by a hash decorrelated from txId; the leaked recall collapses to exactly 0.000 under it, on every seed tried. Both branches are real and currently live in this file — not a before/after reconstructed from memory.</div>
+        </div>
+      </div>
+
+      <div class="callout amber"><span class="icon">⚠</span><div><b>What's genuinely on the HPC cluster and nowhere else.</b> The raw Elliptic/PaySim CSVs and the trained checkpoints never leave RACC2's scratch storage — only code, metrics JSON, and exported case samples are synced back into this repository. Every excerpt above is the actual code, not a description of it.</div></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const titles = {
+    cases:      ["Workspace", "Fraud triage"],
+    cost:       ["Review / Privacy budget", "Utility across privacy budgets"],
+    guarantee:  ["Review / Privacy audit", "Membership-inference risk by class"],
+    broke:      ["Findings / Class imbalance", "Collapse and recovery under DP-SGD"],
+    proof:      ["Findings / Controls", "Control experiments"],
+    built:      ["System / Pipeline", "Data pipeline and reproducibility"],
+    code:       ["System / Source", "Source excerpts"]
+  };
+
+  function goPanel(key){
+    const el = document.querySelector('.nav-item[data-panel="'+key+'"]');
+    if(el) el.click();
+  }
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const key = item.dataset.panel;
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + key).classList.add('active');
+      document.getElementById('crumb').textContent = titles[key][0];
+      document.getElementById('topbar-title').textContent = titles[key][1];
+      document.querySelector('main.content').scrollTo(0,0);
+    });
+  });
+
+  // ---- case queue (panel 05) ----
+  // ALL 160 cases in results/demo_cases.json, embedded below at build time
+  // (not fetched live) -- the deployed (oversampled) checkpoint's actual
+  // scored output on real held-out Elliptic test transactions, never seen
+  // in training. 40 per outcome type (o: tp/fn/fp/tn), the file's own full
+  // split. id = case id, t = true_label, p = fraud_probability, a = that
+  // case's top_attributions as [feature_index, attribution] pairs (top 4
+  // by magnitude). Every value is copied from the source file (rounded
+  // only beyond the precision ever displayed here). Feature indices are
+  // the dataset's own anonymised column indices -- Elliptic publishes no
+  // semantics for them, per the source file's own note. The outcome field
+  // `o` reflects the file's own decision_threshold (0.5); the live
+  // threshold slider recomputes outcomes from `t`/`p` directly and does
+  // not depend on `o`.
+  const CASES = [
+  {id:8464,o:'tp',t:1,p:0.996685,a:[[147,0.309928],[149,0.279925],[51,0.265916],[52,0.264654]]},
+  {id:516,o:'tp',t:1,p:0.994413,a:[[20,-0.436267],[148,-0.370585],[147,0.370376],[52,0.335544]]},
+  {id:9073,o:'tp',t:1,p:0.996323,a:[[147,0.482327],[2,-0.313491],[52,0.298089],[51,0.290781]]},
+  {id:1199,o:'tp',t:1,p:0.995432,a:[[147,0.486047],[149,0.305149],[52,0.289386],[51,0.280863]]},
+  {id:353,o:'tp',t:1,p:0.9949,a:[[148,0.433037],[149,0.265524],[51,0.253429],[52,0.246189]]},
+  {id:9330,o:'tp',t:1,p:0.98998,a:[[147,0.262067],[140,-0.225278],[91,0.223003],[99,0.211739]]},
+  {id:9626,o:'tp',t:1,p:0.996887,a:[[149,0.276226],[51,0.243213],[52,0.233937],[89,0.222726]]},
+  {id:520,o:'tp',t:1,p:0.996536,a:[[148,0.452049],[149,0.281153],[51,0.26841],[52,0.258832]]},
+  {id:4566,o:'tp',t:1,p:0.99601,a:[[147,0.562835],[148,-0.353916],[149,0.266537],[52,0.248251]]},
+  {id:7248,o:'tp',t:1,p:0.995401,a:[[147,0.428725],[20,-0.394622],[2,-0.372529],[51,0.303611]]},
+  {id:5815,o:'tp',t:1,p:0.99776,a:[[20,-0.551758],[147,0.473997],[52,0.36546],[157,0.350474]]},
+  {id:489,o:'tp',t:1,p:0.997103,a:[[147,0.451313],[52,0.280942],[51,0.272214],[149,0.26605]]},
+  {id:4446,o:'tp',t:1,p:0.999301,a:[[149,0.259984],[148,0.254349],[51,0.233253],[52,0.226722]]},
+  {id:6865,o:'tp',t:1,p:0.994112,a:[[147,0.533686],[2,-0.359198],[52,0.334974],[51,0.317653]]},
+  {id:4293,o:'tp',t:1,p:0.996407,a:[[87,0.756682],[148,0.409536],[153,0.287255],[52,0.263076]]},
+  {id:724,o:'tp',t:1,p:0.992598,a:[[52,0.295273],[164,-0.28782],[51,0.281706],[54,0.273308]]},
+  {id:1688,o:'tp',t:1,p:0.9962,a:[[148,0.447623],[149,0.280973],[51,0.26039],[52,0.258498]]},
+  {id:6848,o:'tp',t:1,p:0.996588,a:[[147,0.514161],[2,-0.354548],[52,0.315894],[51,0.312098]]},
+  {id:5204,o:'tp',t:1,p:0.969936,a:[[80,0.296536],[51,0.276121],[52,0.271445],[134,-0.259266]]},
+  {id:8535,o:'tp',t:1,p:0.959357,a:[[20,-0.715943],[2,-0.517449],[147,0.4784],[52,0.435071]]},
+  {id:7562,o:'tp',t:1,p:0.993807,a:[[147,0.364463],[2,-0.342795],[52,0.331818],[51,0.316459]]},
+  {id:5309,o:'tp',t:1,p:0.994912,a:[[148,-0.362975],[164,0.266757],[51,0.251533],[54,0.237787]]},
+  {id:4300,o:'tp',t:1,p:0.991913,a:[[147,0.501204],[52,0.343722],[51,0.317502],[149,0.308343]]},
+  {id:8793,o:'tp',t:1,p:0.996102,a:[[2,-0.295014],[51,0.288017],[52,0.282874],[149,0.268701]]},
+  {id:7868,o:'tp',t:1,p:0.996312,a:[[2,-0.284765],[51,0.271808],[52,0.263863],[149,0.251821]]},
+  {id:8551,o:'tp',t:1,p:0.996619,a:[[147,0.582591],[148,-0.365828],[149,0.269925],[52,0.249465]]},
+  {id:7664,o:'tp',t:1,p:0.994801,a:[[147,0.313393],[2,-0.287916],[149,0.266611],[51,0.265877]]},
+  {id:5374,o:'tp',t:1,p:0.995344,a:[[147,0.594764],[148,-0.383323],[52,0.271667],[149,0.265437]]},
+  {id:8546,o:'tp',t:1,p:0.999075,a:[[149,0.287776],[51,0.23626],[52,0.229828],[155,0.225865]]},
+  {id:1119,o:'tp',t:1,p:0.99766,a:[[147,0.654173],[148,-0.434786],[52,0.326878],[51,0.3071]]},
+  {id:8098,o:'tp',t:1,p:0.993448,a:[[147,0.374112],[2,-0.274461],[80,0.259497],[52,0.219593]]},
+  {id:3975,o:'tp',t:1,p:0.99784,a:[[87,0.660683],[148,0.342618],[153,0.262714],[141,0.234649]]},
+  {id:3296,o:'tp',t:1,p:0.996971,a:[[147,0.585371],[153,0.516524],[148,-0.331658],[141,0.261707]]},
+  {id:8067,o:'tp',t:1,p:0.996165,a:[[52,0.254993],[51,0.251427],[149,0.247132],[155,0.208516]]},
+  {id:6009,o:'tp',t:1,p:0.997874,a:[[153,1.30637],[156,-0.695532],[147,0.652965],[141,0.547174]]},
+  {id:6804,o:'tp',t:1,p:0.994897,a:[[147,0.373468],[2,-0.3438],[52,0.336114],[51,0.325692]]},
+  {id:7865,o:'tp',t:1,p:0.996287,a:[[2,-0.283617],[51,0.272042],[52,0.262986],[149,0.253734]]},
+  {id:4174,o:'tp',t:1,p:0.998777,a:[[87,0.742919],[89,0.253877],[148,0.245629],[52,0.241253]]},
+  {id:4445,o:'tp',t:1,p:0.998579,a:[[148,0.451771],[52,0.313694],[51,0.294496],[149,0.288229]]},
+  {id:479,o:'tp',t:1,p:0.998613,a:[[148,0.439884],[51,0.281088],[149,0.275504],[52,0.271968]]},
+  {id:15481,o:'fn',t:1,p:0.0186826,a:[[127,-0.512252],[157,-0.454406],[115,-0.43372],[56,-0.370186]]},
+  {id:11696,o:'fn',t:1,p:0.000245445,a:[[56,-0.696556],[55,-0.574841],[157,-0.567125],[158,-0.43585]]},
+  {id:15962,o:'fn',t:1,p:0.000549001,a:[[51,-1.01522],[157,-0.885206],[20,-0.768057],[54,-0.765974]]},
+  {id:14951,o:'fn',t:1,p:0.00124892,a:[[53,-0.604861],[127,-0.589178],[157,-0.511197],[115,-0.505315]]},
+  {id:7438,o:'fn',t:1,p:0.000150107,a:[[135,-2.98879],[138,-1.83733],[136,-1.28079],[148,0.554265]]},
+  {id:16209,o:'fn',t:1,p:0.000310484,a:[[26,-0.59075],[56,-0.45417],[157,-0.434307],[44,-0.432636]]},
+  {id:16611,o:'fn',t:1,p:0.390623,a:[[147,0.734103],[56,0.622808],[98,-0.594405],[53,-0.570831]]},
+  {id:6473,o:'fn',t:1,p:0.0786134,a:[[155,-1.31745],[147,0.772665],[20,-0.625986],[154,-0.602297]]},
+  {id:5868,o:'fn',t:1,p:0.000241278,a:[[53,-0.795625],[52,-0.728219],[50,-0.578055],[54,-0.446933]]},
+  {id:15878,o:'fn',t:1,p:0.000438045,a:[[157,-0.46851],[20,-0.463436],[53,-0.380785],[158,-0.375345]]},
+  {id:15614,o:'fn',t:1,p:0.00324057,a:[[53,-1.24255],[20,-0.817324],[52,-0.730937],[147,0.67154]]},
+  {id:15964,o:'fn',t:1,p:0.00157036,a:[[157,-0.994623],[113,-0.746734],[158,-0.719365],[52,-0.70887]]},
+  {id:16135,o:'fn',t:1,p:0.0011901,a:[[52,-1.22519],[53,-1.03212],[147,0.759084],[56,-0.742861]]},
+  {id:9191,o:'fn',t:1,p:0.0133972,a:[[49,-0.951189],[50,-0.87418],[121,0.685166],[44,-0.666327]]},
+  {id:3144,o:'fn',t:1,p:0.000981063,a:[[53,-0.91511],[52,-0.860675],[54,-0.672917],[147,0.612745]]},
+  {id:14477,o:'fn',t:1,p:7.26906e-05,a:[[1,-2.3276],[5,-1.09401],[3,-0.860764],[2,-0.141112]]},
+  {id:7126,o:'fn',t:1,p:0.000217542,a:[[135,-3.04678],[138,-1.90068],[136,-1.33369],[148,0.565492]]},
+  {id:5990,o:'fn',t:1,p:0.000220465,a:[[53,-1.03831],[52,-0.825541],[113,-0.722009],[157,-0.572664]]},
+  {id:14922,o:'fn',t:1,p:0.000130892,a:[[157,-0.412567],[104,-0.400817],[20,-0.37219],[53,-0.332393]]},
+  {id:7505,o:'fn',t:1,p:8.58228e-05,a:[[135,-3.56726],[138,-2.21058],[136,-1.55276],[148,0.672058]]},
+  {id:15983,o:'fn',t:1,p:0.000300034,a:[[52,-1.08701],[56,-0.978924],[54,-0.737549],[51,-0.718804]]},
+  {id:12308,o:'fn',t:1,p:0.0140077,a:[[43,-0.853649],[44,-0.816217],[50,-0.697108],[49,-0.555465]]},
+  {id:16037,o:'fn',t:1,p:0.00732131,a:[[157,-0.70549],[53,-0.597346],[158,-0.573669],[52,-0.535504]]},
+  {id:4026,o:'fn',t:1,p:0.00338811,a:[[113,-0.493056],[53,-0.472393],[52,-0.390399],[157,-0.386648]]},
+  {id:9939,o:'fn',t:1,p:0.000163763,a:[[53,-0.551944],[26,-0.399535],[157,-0.389789],[113,-0.374954]]},
+  {id:8797,o:'fn',t:1,p:0.0856364,a:[[43,-0.523321],[44,-0.514916],[113,-0.50421],[49,-0.437884]]},
+  {id:16024,o:'fn',t:1,p:0.0296723,a:[[73,-0.688772],[74,-0.653916],[89,-0.597957],[52,-0.546473]]},
+  {id:16236,o:'fn',t:1,p:0.00105536,a:[[157,-0.677087],[155,-0.638488],[158,-0.539215],[102,0.467514]]},
+  {id:10725,o:'fn',t:1,p:0.000956005,a:[[113,-0.875141],[26,-0.635667],[157,-0.601075],[50,-0.594452]]},
+  {id:11615,o:'fn',t:1,p:0.00598121,a:[[49,-0.815207],[53,-0.729568],[50,-0.599382],[44,-0.545877]]},
+  {id:16659,o:'fn',t:1,p:0.0134955,a:[[52,-0.744205],[20,-0.713462],[155,-0.696097],[102,0.517219]]},
+  {id:11825,o:'fn',t:1,p:0.161918,a:[[52,-1.61695],[53,-1.32696],[147,0.58698],[54,-0.448695]]},
+  {id:9062,o:'fn',t:1,p:0.0339876,a:[[49,-0.434628],[52,-0.380666],[53,-0.368803],[43,-0.333151]]},
+  {id:12707,o:'fn',t:1,p:0.271697,a:[[115,-0.952338],[157,-0.834816],[158,-0.640341],[20,-0.531238]]},
+  {id:10145,o:'fn',t:1,p:0.00261756,a:[[157,-0.666058],[20,-0.554307],[158,-0.540965],[102,0.368233]]},
+  {id:7348,o:'fn',t:1,p:0.000104795,a:[[135,-3.56421],[138,-2.23244],[136,-1.55241],[148,0.672951]]},
+  {id:204,o:'fn',t:1,p:0.0112796,a:[[53,-0.623521],[50,-0.325535],[122,-0.276288],[26,-0.269144]]},
+  {id:16585,o:'fn',t:1,p:0.0026753,a:[[53,-0.512898],[127,-0.490324],[157,-0.427901],[43,-0.418822]]},
+  {id:6714,o:'fn',t:1,p:0.000279929,a:[[135,-2.98655],[138,-1.86018],[136,-1.30806],[148,0.557719]]},
+  {id:15888,o:'fn',t:1,p:0.00340028,a:[[49,-0.797883],[157,-0.743994],[147,0.743229],[43,-0.693348]]},
+  {id:6122,o:'fp',t:0,p:0.694085,a:[[147,0.908048],[20,-0.668847],[2,-0.551985],[148,-0.491694]]},
+  {id:7063,o:'fp',t:0,p:0.99747,a:[[147,0.424121],[149,0.276914],[51,0.260312],[52,0.246247]]},
+  {id:12074,o:'fp',t:0,p:0.932311,a:[[113,-0.605167],[109,-0.583211],[115,-0.56901],[152,-0.286315]]},
+  {id:8360,o:'fp',t:0,p:0.99713,a:[[20,-0.508693],[52,0.304721],[157,0.289639],[89,0.279902]]},
+  {id:11944,o:'fp',t:0,p:0.959411,a:[[149,0.4992],[147,0.490074],[164,-0.413545],[163,-0.326504]]},
+  {id:8443,o:'fp',t:0,p:0.96887,a:[[73,-0.722494],[74,-0.625323],[51,-0.33114],[20,0.319055]]},
+  {id:15509,o:'fp',t:0,p:0.946155,a:[[147,0.637065],[148,-0.438888],[102,0.333028],[143,-0.291026]]},
+  {id:1838,o:'fp',t:0,p:0.613125,a:[[43,-0.834659],[56,0.790118],[12,-0.698479],[49,-0.675884]]},
+  {id:16529,o:'fp',t:0,p:0.732658,a:[[73,-0.530809],[74,-0.508106],[99,0.370303],[102,0.267104]]},
+  {id:7014,o:'fp',t:0,p:0.931052,a:[[73,-0.701577],[74,-0.62794],[99,0.367262],[51,-0.344023]]},
+  {id:3104,o:'fp',t:0,p:0.982714,a:[[20,-0.832781],[19,-0.38974],[149,0.380906],[89,0.369334]]},
+  {id:3090,o:'fp',t:0,p:0.996001,a:[[147,0.568406],[148,-0.321062],[149,0.295738],[74,0.266441]]},
+  {id:12463,o:'fp',t:0,p:0.986495,a:[[149,-0.446725],[148,-0.437485],[20,-0.415686],[164,0.306076]]},
+  {id:5864,o:'fp',t:0,p:0.815211,a:[[51,-1.23988],[87,1.08698],[54,-0.910938],[52,-0.844028]]},
+  {id:11705,o:'fp',t:0,p:0.621254,a:[[148,0.918042],[157,-0.836313],[158,-0.475634],[51,-0.425779]]},
+  {id:5290,o:'fp',t:0,p:0.629124,a:[[157,-0.535546],[147,0.510346],[137,-0.337302],[148,-0.307667]]},
+  {id:7554,o:'fp',t:0,p:0.96026,a:[[73,-0.738387],[74,-0.653713],[99,0.346958],[20,0.33472]]},
+  {id:11958,o:'fp',t:0,p:0.994565,a:[[148,0.459649],[12,-0.356031],[121,0.274057],[164,0.272567]]},
+  {id:2798,o:'fp',t:0,p:0.995117,a:[[164,0.251564],[88,0.221481],[52,0.217523],[155,0.21707]]},
+  {id:11879,o:'fp',t:0,p:0.988627,a:[[20,-0.75729],[52,0.419682],[51,0.405616],[54,0.360489]]},
+  {id:16313,o:'fp',t:0,p:0.991723,a:[[51,-1.68892],[87,1.27021],[52,-1.23968],[54,-1.13565]]},
+  {id:12521,o:'fp',t:0,p:0.987314,a:[[20,-0.652643],[74,-0.519137],[73,-0.485336],[52,0.460625]]},
+  {id:7165,o:'fp',t:0,p:0.965535,a:[[147,0.571843],[20,-0.544923],[148,-0.494472],[52,0.38839]]},
+  {id:6415,o:'fp',t:0,p:0.724321,a:[[87,3.70888],[51,-1.04285],[54,-0.836049],[52,-0.807329]]},
+  {id:382,o:'fp',t:0,p:0.984181,a:[[149,0.466812],[147,0.429107],[134,-0.287346],[155,0.270169]]},
+  {id:13941,o:'fp',t:0,p:0.975024,a:[[148,-0.427287],[147,0.387024],[164,-0.374647],[163,-0.320089]]},
+  {id:2971,o:'fp',t:0,p:0.976672,a:[[73,-0.788545],[74,-0.72485],[51,-0.397147],[20,0.338003]]},
+  {id:6720,o:'fp',t:0,p:0.594333,a:[[152,-0.380206],[140,-0.338347],[102,0.300444],[164,-0.294984]]},
+  {id:14714,o:'fp',t:0,p:0.930361,a:[[153,0.713111],[20,-0.659101],[74,0.574741],[105,-0.565845]]},
+  {id:12765,o:'fp',t:0,p:0.8754,a:[[157,-0.546372],[149,0.504113],[164,-0.421894],[158,-0.307414]]},
+  {id:4202,o:'fp',t:0,p:0.969331,a:[[73,-0.806123],[74,-0.745162],[20,0.39973],[51,-0.386006]]},
+  {id:11256,o:'fp',t:0,p:0.927071,a:[[1,-0.98321],[147,0.619973],[2,-0.533873],[149,0.486013]]},
+  {id:5664,o:'fp',t:0,p:0.809568,a:[[51,-1.19828],[54,-0.864769],[52,-0.727684],[89,0.418573]]},
+  {id:12119,o:'fp',t:0,p:0.759854,a:[[164,-0.45845],[149,0.415989],[163,-0.308425],[133,-0.30088]]},
+  {id:8376,o:'fp',t:0,p:0.990869,a:[[20,-0.65354],[52,0.404735],[51,0.39226],[54,0.333865]]},
+  {id:7747,o:'fp',t:0,p:0.563775,a:[[20,-0.96003],[147,0.624923],[52,0.618313],[51,0.594595]]},
+  {id:11488,o:'fp',t:0,p:0.561227,a:[[20,-0.669466],[96,-0.620303],[147,0.604591],[73,-0.531843]]},
+  {id:2143,o:'fp',t:0,p:0.986994,a:[[20,-0.731859],[52,0.439283],[157,0.411848],[51,0.40843]]},
+  {id:1439,o:'fp',t:0,p:0.983226,a:[[149,-0.338345],[147,-0.266697],[164,0.259795],[157,0.229383]]},
+  {id:1473,o:'fp',t:0,p:0.992642,a:[[52,0.256541],[51,0.253665],[134,-0.251846],[155,0.233122]]},
+  {id:11294,o:'tn',t:0,p:0.00166231,a:[[157,-0.801647],[158,-0.619698],[152,-0.5118],[151,-0.508561]]},
+  {id:15979,o:'tn',t:0,p:0.00105424,a:[[51,-1.62082],[54,-1.22152],[52,-1.06954],[20,-0.58063]]},
+  {id:12911,o:'tn',t:0,p:0.000401595,a:[[51,-2.06391],[52,-1.75497],[54,-1.71273],[155,-1.63135]]},
+  {id:15476,o:'tn',t:0,p:0.000260869,a:[[51,-2.26316],[52,-1.87584],[54,-1.82392],[89,-0.82562]]},
+  {id:9932,o:'tn',t:0,p:0.450179,a:[[89,-0.893552],[88,-0.489175],[164,0.374481],[147,0.327437]]},
+  {id:4972,o:'tn',t:0,p:0.268936,a:[[147,0.774345],[148,-0.708633],[20,-0.637277],[144,0.527696]]},
+  {id:7989,o:'tn',t:0,p:0.000197239,a:[[51,-0.784778],[54,-0.661814],[157,-0.612702],[52,-0.591539]]},
+  {id:10075,o:'tn',t:0,p:0.000148392,a:[[157,-0.29283],[137,-0.263634],[158,-0.260846],[20,-0.260833]]},
+  {id:8248,o:'tn',t:0,p:0.000140204,a:[[52,-1.66797],[53,-0.935452],[113,-0.600858],[2,-0.512338]]},
+  {id:2417,o:'tn',t:0,p:0.387217,a:[[113,-0.487294],[154,-0.461926],[2,-0.416193],[155,-0.263061]]},
+  {id:7066,o:'tn',t:0,p:0.000503094,a:[[2,-0.294443],[158,-0.288372],[43,-0.286794],[102,0.285836]]},
+  {id:5184,o:'tn',t:0,p:0.00142016,a:[[87,0.365614],[20,-0.320509],[82,-0.279252],[40,-0.268758]]},
+  {id:2815,o:'tn',t:0,p:0.000915798,a:[[51,-2.20826],[54,-1.72023],[52,-1.59019],[20,-0.863136]]},
+  {id:10026,o:'tn',t:0,p:8.52554e-05,a:[[50,-0.385344],[44,-0.320384],[107,-0.312515],[49,-0.312159]]},
+  {id:1793,o:'tn',t:0,p:6.8302e-05,a:[[105,-0.835788],[106,-0.527573],[108,-0.463709],[56,-0.399588]]},
+  {id:16462,o:'tn',t:0,p:0.0135966,a:[[51,-2.42609],[52,-2.05174],[54,-1.84225],[89,-0.90016]]},
+  {id:5047,o:'tn',t:0,p:0.000107927,a:[[20,-0.352815],[87,0.352634],[157,-0.345127],[158,-0.287197]]},
+  {id:7314,o:'tn',t:0,p:0.000313796,a:[[49,-0.402389],[26,-0.359954],[44,-0.335709],[157,-0.311206]]},
+  {id:1662,o:'tn',t:0,p:0.15039,a:[[51,-2.96937],[52,-2.4362],[54,-2.35324],[87,0.889553]]},
+  {id:1513,o:'tn',t:0,p:0.047834,a:[[88,-1.43044],[89,-1.36141],[147,-0.446997],[102,0.392094]]},
+  {id:7610,o:'tn',t:0,p:0.114107,a:[[20,-1.07328],[51,-0.808801],[19,-0.566515],[54,-0.557685]]},
+  {id:13393,o:'tn',t:0,p:0.000145534,a:[[95,-1.72825],[56,-0.433057],[94,-0.428827],[157,-0.3447]]},
+  {id:764,o:'tn',t:0,p:0.00017302,a:[[123,-0.654422],[126,-0.50634],[89,-0.374796],[124,-0.344384]]},
+  {id:10598,o:'tn',t:0,p:0.000183331,a:[[155,-1.65003],[144,0.855237],[154,-0.753008],[147,0.664039]]},
+  {id:417,o:'tn',t:0,p:0.000935494,a:[[52,-1.13992],[53,-0.8282],[54,-0.568887],[12,-0.381802]]},
+  {id:10895,o:'tn',t:0,p:0.0290336,a:[[1,-2.45164],[2,-0.755432],[157,-0.724651],[158,-0.686838]]},
+  {id:2885,o:'tn',t:0,p:0.0499851,a:[[137,-1.58017],[157,-1.04079],[20,-0.876636],[158,-0.761703]]},
+  {id:2948,o:'tn',t:0,p:0.000279434,a:[[53,-0.774496],[52,-0.637115],[157,-0.586653],[113,-0.563856]]},
+  {id:3081,o:'tn',t:0,p:0.000391734,a:[[105,-2.22763],[108,-1.20556],[106,-1.13663],[123,-0.277312]]},
+  {id:2523,o:'tn',t:0,p:0.00012246,a:[[113,-0.644898],[56,-0.477349],[137,-0.447414],[44,-0.34736]]},
+  {id:9966,o:'tn',t:0,p:0.431203,a:[[157,-1.08705],[20,-0.959001],[158,-0.95022],[52,0.592808]]},
+  {id:5817,o:'tn',t:0,p:0.00668835,a:[[51,-0.658042],[52,-0.582932],[54,-0.57395],[21,-0.392021]]},
+  {id:8437,o:'tn',t:0,p:0.00250424,a:[[157,-0.835544],[158,-0.701239],[140,-0.487653],[152,-0.478698]]},
+  {id:5537,o:'tn',t:0,p:0.000141443,a:[[144,1.28189],[143,-0.790764],[155,-0.709372],[157,-0.544481]]},
+  {id:13508,o:'tn',t:0,p:0.425195,a:[[51,-1.10098],[74,-1.0342],[73,-1.00424],[52,-0.957007]]},
+  {id:11055,o:'tn',t:0,p:0.000153755,a:[[56,-0.981062],[50,-0.738184],[55,-0.648752],[43,-0.53292]]},
+  {id:7012,o:'tn',t:0,p:0.000359129,a:[[53,-0.932198],[52,-0.610806],[113,-0.296574],[56,-0.26213]]},
+  {id:2346,o:'tn',t:0,p:6.12235e-05,a:[[105,-1.6036],[108,-0.955489],[106,-0.703197],[123,-0.398663]]},
+  {id:10575,o:'tn',t:0,p:0.0939848,a:[[161,-0.64496],[160,-0.510816],[51,-0.422045],[99,0.357311]]},
+  {id:10388,o:'tn',t:0,p:0.00445324,a:[[105,-1.43623],[108,-1.01946],[20,-0.666309],[157,0.508253]]}
+];
+
+  const OUTCOME_META = {
+    tp: { badge:'b-tp', label:'Caught',           truth:'Fraud',      pred:'Fraud',      color:'#59656F' },
+    fn: { badge:'b-fn', label:'Missed',            truth:'Fraud',      pred:'Legitimate', color:'#C2352A' },
+    fp: { badge:'b-fp', label:'False alarm',       truth:'Legitimate', pred:'Fraud',      color:'#C2352A' },
+    tn: { badge:'b-tn', label:'Correctly cleared', truth:'Legitimate', pred:'Legitimate', color:'#10151A' },
+  };
+
+  let queueFilter = 'all';
+  let activeCaseId = CASES[0].id;
+
+  function renderAttrs(attrs){
+    // Fixed label column (left) and value column (right) so bar length never
+    // pushes either off the 0-300 viewBox -- a real risk once attributions
+    // come from actual cases rather than 4 cherry-picked examples: whichever
+    // attribution is largest in magnitude always spans the chart's full half
+    // -width, and when that top attribution is negative the old tip-anchored
+    // value label ran off the left edge entirely.
+    const barH=16, gap=8, top=14;
+    const chartLeft=56, chartRight=248, mid=(chartLeft+chartRight)/2, halfSpan=(chartRight-chartLeft)/2;
+    const maxAbs = Math.max(...attrs.map(a=>Math.abs(a[1])));
+    const scale = halfSpan/maxAbs;
+    let svg = '';
+    attrs.forEach((a,i)=>{
+      const y = top + i*(barH+gap);
+      const val = a[1], bw = Math.abs(val)*scale;
+      const x = val>=0 ? mid : mid-bw;
+      const color = val>=0 ? '#C2352A' : '#10151A';
+      svg += `<rect x="${x}" y="${y}" width="${bw}" height="${barH}" rx="3" fill="${color}"/>`;
+      svg += `<text x="8" y="${y+barH-4}" font-size="10.5" fill="#59656F" font-family="IBM Plex Mono">${a[0]}</text>`;
+      svg += `<text x="294" y="${y+barH-4}" font-size="10.5" fill="#10151A" font-family="IBM Plex Mono" text-anchor="end">${val>=0?'+':''}${val.toFixed(2)}</text>`;
+    });
+    svg += `<line x1="${mid}" y1="6" x2="${mid}" y2="${top+attrs.length*(barH+gap)}" stroke="#DFE4E8" stroke-width="1"/>`;
+    return svg;
+  }
+
+  function renderQueue(){
+    const list = document.getElementById('queue-list');
+    const rows = CASES.filter(c => queueFilter==='all' || c.o===queueFilter);
+    document.getElementById('queue-count').textContent = rows.length + ' of ' + CASES.length + ' shown';
+    list.innerHTML = rows.map(c => {
+      const meta = OUTCOME_META[c.o];
+      const pct = (c.p*100).toFixed(1);
+      return `<button type="button" class="queue-row${c.id===activeCaseId?' active':''}" onclick="openCase(${c.id})">
+        <span class="qid mono">#${c.id}</span>
+        <span class="badge ${meta.badge}">${meta.label}</span>
+        <span class="qmeter"><span class="fill" style="width:${pct}%;background:${meta.color};"></span></span>
+        <span class="qprob mono">${c.p.toFixed(3)}</span>
+      </button>`;
+    }).join('');
+  }
+
+  function filterQueue(key, btn){
+    queueFilter = key;
+    document.querySelectorAll('#case-seg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderQueue();
+  }
+
+  // Live triage threshold: recomputes the confusion matrix from the real
+  // t (true_label) / p (fraud_probability) fields on all 160 embedded
+  // cases -- not from the static `o` field, which only reflects the file's
+  // own fixed decision_threshold (0.5). This is a genuine recomputation
+  // over the 160-case sample, deliberately kept separate from the static
+  // full-test-set KPI row above it (16,666 windows) -- the two numbers
+  // are related but not interchangeable, and conflating them would repeat
+  // the exact kind of misleading-caption problem fixed elsewhere on this
+  // panel.
+  function onThresholdChange(v){
+    const threshold = parseFloat(v);
+    document.getElementById('thresh-val').textContent = threshold.toFixed(2);
+    let tp=0, fn=0, fp=0, tn=0;
+    CASES.forEach(c => {
+      const predicted = c.p >= threshold ? 1 : 0;
+      if(c.t===1 && predicted===1) tp++;
+      else if(c.t===1 && predicted===0) fn++;
+      else if(c.t===0 && predicted===1) fp++;
+      else tn++;
+    });
+    const nFraud = tp+fn, nLegit = fp+tn, flags = tp+fp;
+    const recall = nFraud>0 ? tp/nFraud : 0;
+
+    // Counts inside their own population's bar.
+    const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent = v; };
+    set('live-tp',tp); set('live-fn',fn); set('live-fp',fp); set('live-tn',tn);
+    set('led-tp',tp);  set('led-fn',fn);  set('led-fp',fp);  set('led-tn',tn);
+    set('den-a','n = '+nFraud); set('den-b','n = '+nLegit);
+    set('live-recall', recall.toFixed(3));
+
+    // Each row is scaled to its OWN denominator — never to the other's.
+    const grow = (id,n,d) => {
+      const e=document.getElementById(id); if(!e) return;
+      e.style.flexGrow = d>0 ? (n/d)*100 : 0;
+      e.style.padding = n===0 ? '0' : '0 8px';
+    };
+    grow('seg-tp',tp,nFraud); grow('seg-fn',fn,nFraud);
+    grow('seg-fp',fp,nLegit); grow('seg-tn',tn,nLegit);
+
+    // Precision is the one ratio that spans both rows, so it is a length
+    // on neither. When nothing is flagged it is undefined, not zero —
+    // there is no denominator to divide by.
+    const cross = document.getElementById('live-cross');
+    if(cross){
+      cross.innerHTML = flags===0
+        ? 'Nothing is flagged at this threshold, so precision is <b>undefined</b> — not zero. There is no denominator to divide by. Recall is <b>0.000</b>: every one of the '+nFraud+' frauds is missed.'
+        : '<b>'+flags+'</b> flags raised in this sample — <b>'+tp+'</b> of them fraud. Precision <b>'+tp+' / '+flags+' = '+(tp/flags).toFixed(3)+'</b>.';
+    }
+  }
+
+  function openCase(id){
+    const c = CASES.find(x=>x.id===id);
+    if(!c) return;
+    activeCaseId = id;
+    const meta = OUTCOME_META[c.o];
+    const rows = [
+      ['Case ID', '#'+c.id],
+      ['Ground truth', meta.truth],
+      ['Predicted', meta.pred],
+      ['Fraud probability', c.p.toFixed(3)],
+      ['Outcome', meta.label],
+    ];
+    document.getElementById('case-detail-sub').textContent = 'Held-out test transaction, scored by the deployed checkpoint';
+    document.getElementById('case-table').innerHTML = rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+    document.getElementById('attr-svg').innerHTML = renderAttrs(c.a.map(a=>['F'+a[0], a[1]]));
+    renderQueue();
+  }
+
+  // Live group-privacy calculator (panel-cost). Real base numbers from the
+  // oversampled configuration's own accountant output: epsilon0=1.828,
+  // delta0=1e-5. Standard group-privacy composition for k simultaneously
+  // differing records: (eps, delta) -> (k*eps, k*e^((k-1)*eps)*delta).
+  // k=5 reproduces the thesis's own ~9.14 / ~0.0749 exactly. delta grows
+  // so much faster than eps that it exceeds 1 (impossible for a
+  // probability) well before k reaches the slider's max -- that case is
+  // flagged explicitly rather than shown as a number, per the same
+  // no-nonsense-numbers standard as the rest of this dashboard.
+  const EPS0 = 1.828, DELTA0 = 1e-5;
+  function onKChange(v){
+    const k = parseInt(v, 10);
+    document.getElementById('k-val').textContent = k;
+    const eps = k * EPS0;
+    const delta = k * Math.exp((k-1)*EPS0) * DELTA0;
+    document.getElementById('k-eps').textContent = 'ε ≈ ' + eps.toFixed(2);
+    const deltaEl = document.getElementById('k-delta');
+    if(delta >= 1){
+      deltaEl.textContent = 'δ ≥ 1 — no guarantee at all';
+      deltaEl.style.color = 'var(--red)';
+    } else {
+      // Below ~1e-3, fixed 4dp rounds a real guarantee to a misleading "0.0000".
+      // Show significant figures instead, so k=1 reads as its true 1e-5.
+      const shown = delta < 1e-3 ? delta.toExponential(0).replace('e-', 'e-') : delta.toFixed(4);
+      deltaEl.textContent = 'δ ≈ ' + shown + (delta > 0.01 ? ' (≈' + Math.round(delta/1e-5) + '× nominal)' : '');
+      deltaEl.style.color = k === 1 ? 'var(--ink-2)' : 'var(--ochre)';
+    }
+  }
+
+  // Membership-inference audit explorer (panel-guarantee). Every field below
+  // is copied verbatim from results/attacks/mia_results_stratified.json --
+  // aggregate + by-class stats for both configurations. No per-sample loss
+  // values exist in that file, so this is a toggle over real precomputed
+  // numbers, not a live-computed function like the threshold slider or the
+  // privacy calculator above -- shown as such, not overclaimed.
+  const MIA_DATA = {
+    baseline_no_dp: {
+      Safe:  {n_members_sampled:800, n_members_available:26428, n_nonmembers_sampled:800, n_nonmembers_available:15585, mean_member_loss:0.18676757156594248, mean_nonmember_loss:0.3090258911332057, attack_auc:0.6082640625},
+      Fraud: {n_members_sampled:800, n_members_available:3462,  n_nonmembers_sampled:800, n_nonmembers_available:1081,  mean_member_loss:0.07597056431150122, mean_nonmember_loss:0.635006747206935,  attack_auc:0.8600921875}
+    },
+    dp_sgd_oversampled: {
+      Safe:  {n_members_sampled:800, n_members_available:26428, n_nonmembers_sampled:800, n_nonmembers_available:15585, mean_member_loss:0.17000762813062464, mean_nonmember_loss:0.48748549627005106, attack_auc:0.6864679687499999},
+      Fraud: {n_members_sampled:800, n_members_available:3462,  n_nonmembers_sampled:800, n_nonmembers_available:1081,  mean_member_loss:0.6023771367662266,  mean_nonmember_loss:1.594704704929245,  attack_auc:0.6301765625000001}
+    }
+  };
+  let miaConfig = 'baseline_no_dp', miaClass = 'Safe';
+
+  function renderMia(){
+    const d = MIA_DATA[miaConfig][miaClass];
+    document.getElementById('mia-auc').textContent = d.attack_auc.toFixed(3);
+    document.getElementById('mia-mloss').textContent = d.mean_member_loss.toFixed(3);
+    document.getElementById('mia-nloss').textContent = d.mean_nonmember_loss.toFixed(3);
+    document.getElementById('mia-sampling').innerHTML =
+      `Sampling transparency: <b>${d.n_members_sampled.toLocaleString()}</b> of <b>${d.n_members_available.toLocaleString()}</b> available ${miaClass.toLowerCase()}-class training members sampled as "members"; ` +
+      `<b>${d.n_nonmembers_sampled.toLocaleString()}</b> of <b>${d.n_nonmembers_available.toLocaleString()}</b> available held-out ${miaClass.toLowerCase()}-class rows sampled as "non-members" -- these counts are never shown on the static chart above.`;
+  }
+  function setMiaConfig(v, btn){
+    miaConfig = v;
+    document.querySelectorAll('#mia-config-seg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMia();
+  }
+  function setMiaClass(v, btn){
+    miaClass = v;
+    document.querySelectorAll('#mia-class-seg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMia();
+  }
+
+  openCase(CASES[0].id);
+  onThresholdChange(0.5);
+  onKChange(5);
+  renderMia();
+</script>
+
+</body>
+</html>
