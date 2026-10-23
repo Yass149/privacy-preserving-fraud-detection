@@ -5,7 +5,7 @@ Yassine Malal · Supervisor: Dr. Xiaomin Chen
 
 A GRU-based fraud detector evaluated with and without differentially private training. The project measures what DP-SGD changes for minority-class detection on the Elliptic Bitcoin transaction dataset and tests the finding again on PaySim. It includes the training code, saved experiment results and checkpoints, and an interactive results console that opens offline.
 
-> **Start with the demo:** download or clone this repository, then open [`dashboard/index.html`](dashboard/index.html) in a browser. It needs no server, Python environment, or network connection.
+> **[Open the live results console](https://yass149.github.io/privacy-preserving-fraud-detection/)**, or download this repository and open [`dashboard/index.html`](dashboard/index.html) in a browser. The downloaded version needs no server, Python environment, or network connection.
 
 ## Screenshots
 
